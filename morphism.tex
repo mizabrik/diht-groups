@@ -1,0 +1,290 @@
+\documentclass[main]{subfiles}
+
+\begin{document}
+\section{Гомоморфизмы групп}
+
+\begin{definition}
+  Пусть $G$, $H$ "--- группы. Отображение $\phi : G \to H$ называется
+  \emph{гомоморфизмом групп}, если $\Forall{g_1, g_2 \in G}
+  \phi(g_1 g_2) = \phi(g_1) \phi(g_2)$.
+  \emph{Образ} гомоморфизма "--- это
+  $\Img \phi = \phi(G) = \{ \phi(g) \mid g \in G \}$.
+  \emph{Ядро} гомоморфизма $\Ker \phi = \phi^{-1}(e_H)$.
+  Гомоморфизм называется \emph{эпиморфизмом}, если $\Img \phi = H$, и
+  \emph{мономорфизмом}, если $\phi$ "--- инъекция.
+\end{definition}
+
+\begin{proposition}
+  Пусть $\phi : G \to H$ "--- гомоморфизм. Тогда:
+  \begin{enumerate}
+    \item $\phi(e_G) = e_H$.
+    \item $\phi(g^{-1}) = \phi(g)^{-1}$.
+  \end{enumerate}
+\end{proposition}
+\begin{proof}~
+  \begin{enumerate}
+    \item $\phi(e) = \phi(e^2) = \phi(e) \phi(e) \To e = \phi(e)$.
+    \item $\phi(g^{-1})\phi(g) = \phi(g^{-1}g) = \phi(e) = e$.
+  \end{enumerate}
+\end{proof}
+
+\begin{proposition}
+  Гомоморфизм $\phi : G \to H$ является мономорфизмом $\oTTo \Ker \phi = \{e\}$.
+\end{proposition}
+\begin{proof}
+  $\phi(e) = e \To e \in \Ker \phi$. Если $\phi$ "--- мономорфизм, то
+  $\Forall{e \ne g \in G} \phi(g) \ne \phi(e) \To \Ker \phi = \{e\}$.
+  Если $\Exists{g_1 \ne  g_2} \phi(g_1) = \phi(g_2) \To \phi(g_1^{-1} g_2)
+  = \phi(g_1)^{-1} \phi(g_2) = e \To e \ne g_1^{-1} g_2 \in \Ker \phi$.
+\end{proof}
+
+\begin{examples}~
+  \begin{enumerate}
+    \item $\phi : G \to H$, $\phi(g) = e$.
+    \item $\phi : \Integer \to \Integer_n$, $\phi(a) = a \pmod{n}$;
+      $\Ker \phi = n \Integer$.
+    \item $\phi : GL_n(F) \to F^*$, $\phi(A) = \det A$; $\Ker \phi = SL_n$.
+    \item Изоморфизм является гомоморфизмом. В частности, существуют изоморфизмы
+      группы \emph{на себя} (\emph{автоморфизмы}). Например, если $x \in G$, то
+      $\phi_x : g \mapsto g^x$ "--- автоморфизм.
+  \end{enumerate}
+\end{examples}
+
+\begin{proposition}
+  Пусть $\phi : G \to H$ "--- гомоморфизм групп. Тогда $\Img \phi < H$,
+  $\Ker \phi \NSG G$.
+\end{proposition}
+\begin{proof}
+  Если $h_1, h_2 \in \Img \phi$, то $h_i = \phi(g_i)$. $g_i \in G \To
+  h_1 h_2 = \phi(g_1 g_2) \in \Img \phi$, $h_1^{-1} = \phi(g_1^{-1}) \in
+  \Img \phi$. Значит, $\Img \phi < H$.
+
+  Если $g_1, g_2 \in \Ker \phi$, то $\phi(g_1 g_2) = \phi(g_1)\phi(g_2) = e$,
+  $\phi(g_1^{-1}) = e \To g_1 g_2, g_1^{-1} \in \Ker \phi \To \Ker \phi < G$.
+  Кроме того, $\phi(x^{-1} \cdot \Ker \phi \cdot x) = \phi(x)^{-1} \cdot
+  \phi(\Ker \phi) \cdot \phi(x) = \phi(x)^{-1} \phi(x) = e \To
+  \Forall{x \in G} x^{-1} \Ker \phi \cdot x \subseteq \Ker \phi \To
+  \Ker \phi \NSG G$.
+\end{proof}
+
+\begin{remark}
+  Если $K < H$, то $\phi : K \to H$, $\phi(k) = k$ "--- это гомоморфизм,
+  $\Img \phi = K$.
+\end{remark}
+
+Пусть $K \NSG G$. Рассмотрим $\Factor{G}[K]$ "---
+множество левых смежных классов по $K$.
+Если $aK, bK \in \Factor{G}[K]$,
+то $aK \cdot bK = a (Kb) K =  abKK = abK \in \Factor{G}[K]$
+(в силу нормальности).
+
+\begin{theorem}
+  $(\Factor{G}[K], \cdot)$ "--- группа.
+\end{theorem}
+\begin{proof}
+  Ассоциативность следует из ассоциативности в $G$.
+  Нейтральный элемент "--- это $K = eK$,
+  обратный к $aK$ --- $a^{-1} K$.
+\end{proof}
+
+\begin{definition}
+  Полученная группа "--- \emph{факторгруппа}
+  группы $G$ по нормальной подгруппе $K$.
+\end{definition}
+
+\begin{theorem}
+  Отображение $\pi : G \to \Factor{G}[K]$, $\pi(g) = gK$,
+  является эпиморфизмом,
+  $\Ker \pi = K$.
+\end{theorem}
+\begin{proof}
+  $\pi(g_1 g_2) = g_1 g_2 K =
+  g_1 K \cdot g_2 K = \pi(g_1) \pi(g_2) \To$
+  $\pi$ "--- гомоморфизм.
+  Любой $gK \in \Factor{G}[K]$ есть $\pi(g) \To \pi$ --- эпиморфизм.
+  $g \in \Ker \pi \oTTo \pi(g) = gK
+  = K \oTTo g \in K$. Итак, $\Ker \pi = K$.
+\end{proof}
+
+\begin{definition}
+  $\pi$ "--- \emph{естественный} эпиморфизм $G \to \Factor{G}[K]$.
+\end{definition}
+
+\begin{theorem}[основная теорема о гомоморфизмах групп]
+  Пусть $\phi : G \to H$ "--- гомоморфизм групп, $\Ker \phi = K$.
+  Тогда $K \NSG G$ и $\Img \phi \cong \Factor{G}[K]$. \\
+  Наоборот, если $K \NSG G$,
+  то существует эпиморфизм групп $\pi : G \to \Factor{G}[K]$,
+  $\Ker \phi = K$.
+\end{theorem}
+\begin{proof}
+  Осталось доказать изоморфность образу: $\Img \phi \cong \Factor{G}[K]$.
+
+  Определим $\psi: \Factor{G}[K] \to \Img \phi$ так:
+  $\psi(aK) = \phi(aK) =
+  \phi(a) \phi(K) = \phi(a)$.
+  Если $\phi(a) \in \Img \phi$,
+  то $\phi(a) = \psi(aK) \To \psi$ "--- сюрьекция.
+  Если $\psi(aK) = \psi(bK)$, то
+  $\phi(a) = \phi(b) \To \phi(a^{-1} b) = e \To
+  a^{-1} b \in \Ker \phi = K
+  \To b \in aK \To bK = aK$.
+  Итак, $\psi$ "--- инъекция.
+
+  Теперь покажем
+  что $\psi$ сохраняет операции:
+  $\psi(aK) \cdot \psi(bK) =
+  \phi(a) \phi(b) = \phi(ab) = \psi(abK) = \psi(aK \cdot bK)$.
+  Значит, $\psi$ "--- изоморфизм.
+\end{proof}
+
+\begin{remark}
+  Если $h \in \Img \phi$, то $\psi^{-1}(h) = \phi^{-1}(h)$.
+\end{remark}
+
+\begin{examples}~
+  \begin{enumerate}
+    \item $\phi : \Integer \to \Integer_n$, $\phi(a) = a \mod{n}$. $\Ker\phi = n\Integer$,
+      $\Img \phi = \Integer_n \To \Integer_n \cong \Integer/n\Integer$.
+    \item $\det: GL_n(F) \to F^*$. $\Img \det = F^*$; $\Ker \det = SL_n(F) \To
+      GL_n(F)/SL_n(F) \cong F^*$.
+  \end{enumerate}
+\end{examples}
+
+\begin{exercise}
+  $S_n/A_n \cong$ ?.
+\end{exercise}
+
+\begin{theorem}[первая теорема об изоморфизме]
+  Пусть $H \NSG G$, $K < G$. Тогда:
+  \begin{enumerate}
+    \item $HK = KH < G$.
+    \item $K \cap H \NSG K$.
+    \item $\Factor{HK}[H] \cong \Factor{K}[(H\cap K)]$.
+  \end{enumerate}
+\end{theorem}
+\begin{proof}
+  Первый пункт уже доказан. Второй и третий следуют из рассмотрения естественного
+  эпиморфизма: $\pi : G \to \Factor{G}[H]$.
+  Тогда $\pi_{HK} \coloneq \pi \bigr|_{HK}$ и
+  $\pi_K \coloneq \pi \bigr|_K$ "--- гомоморфизмы групп.
+  $\Img \pi_{HK} = \pi(HK) = \pi(H) \pi(K) = \pi(K) = \Img \pi_K$.
+  $\Ker \pi_{HK} = H$, $\Ker \pi_K = K \cap H$.
+  Тогда $\Factor{HK}[H] \cong \Img \pi_{HK} =
+  \Img \pi_{K} \cong \Factor{K}[(H \cap K)]$.
+\end{proof}
+
+\begin{remark}
+  Явный вид изоморфизма:
+  $k(H \cap K) \in \Factor{K}[(H \cap K)]
+  \otto kH \in \Factor{HK}[H]$.
+\end{remark}
+
+% --- 2015-09-15 ---
+\begin{remark}
+  $K \cap H \NSG K$, поскольку $K \cap H = \Ker \pi_K$.
+\end{remark}
+
+\begin{example}
+  Пусть $G = S_4$,
+  $H = V_4 = \{ \id, \Cycle{1&2}\Cycle{3&4},
+  \Cycle{1&3}\Cycle{2&4}, \Cycle{1&4}\Cycle{2&3} \}$.
+  Нетрудно поверить, что $V_4 \NSG S_4$
+  ($V_4$ называется четверной группой Клейна).
+  Положим $K = S_3 < S_4$.
+  $H \cap K = \{ id \}$.
+  Это значит, что
+  $\Forall{h _i \in H, k_i \in K}
+  h_1 k_1 = h_2 k_2
+  \To H \ni h_2^{-1} h_1 = k_2 k_1^{-1} \in K
+  \To h_1 = h_2, k_1 = k_2$.
+  Значит, $|HK| = |H| \cdot |K| = 24 \To HK = S_4$.
+  Применяя первую теорему об изоморфизме,
+  имеем $\Factor{S_4}[V_4] = H\Factor{K}[H]
+  \cong \Factor{K}[H\cap K] = \Factor{S_3}[\{id\}] \cong S_3$.
+\end{example}
+
+\begin{theorem}[Вторая теорема об изоморфизме, или теорема о соответствии]
+  Пусть $G$ "--- группа, $H \NSG G$,
+  обозначим \( \overline{G} \coloneq \Factor{G}[H] \).
+  Тогда:
+  \begin{enumerate}
+    \item Для подгруппы \( K < G \) такой,
+      что \( H < K \), обозначим
+      \( \overline{K} \coloneq \Factor{K}[H] \).
+      Тогда \( \overline{K} < \overline{G} \).
+    \item Соответствие $K \otto \overline{K}$ "---
+      биекция между
+      подгруппами в $G$, содержащими $H$,
+      и подгруппами в $\bar{G}$.
+    \item Если \( H < K < G \), то
+      $K \NSG G \oTTo \overline{K} \NSG \overline{G}$,
+      и в этом случае
+      $\Factor{G}[K] \cong \Factor{\overline{G}}[\overline{K}]$.
+  \end{enumerate}
+\end{theorem}
+\begin{proof}
+  Рассмотрим естественный эпиморфизм
+  $\pi : G \to \Factor{G}[H]$ ($\pi(g) = gH$).
+  Тогда $\pi(K) = K\Factor{H}[H] =
+  \Factor{K}[H] = \overline{K}$.
+  Наоборот, если $L < \overline{G}$,
+  то $H < \pi^{-1}(L) < G$
+  (если $a, b \in \pi^{-1}(L)$,
+  то $ab, a^{-1} \in \pi^{-1}(L)$).
+  При этом, $\pi(\pi^{-1}(L)) = L$,
+  ибо $\pi$ "--- сюрьекция;
+  кроме того,
+  для любой такой \( K < G \)
+  $$\pi^{-1}(\pi(K)) = \pi^{-1}(\overline{K}) =
+  \bigcup_{kH \in \overline{K}} kH =
+  \bigcup_{k \in K} kH = K.$$
+  Итак, $\pi$ осуществляет требуемую биекцию
+  $K \to \overline{K}$.
+
+  Если $K \NSG G$, то
+  $g^{-1}Kg = K \To \pi(g)^{-1}\pi(K) \pi(g) = \pi(K)$
+  для любого $g \in G$.
+  Поскольку $\pi$ "--- сюрьекция,
+  $\pi(K) = \overline{K} \NSG \overline{G}$.
+
+  Пусть $\overline{K} \NSG \overline{G}$.
+  Тогда существует естественный эпиморфизм
+  $\pi' : \overline{G} \to \overline{G}/\overline{K}$.
+  Рассмотрим $\pi' \circ \pi:
+  G \to \overline{G}/\overline{K}$.
+  Это "--- эпиморфизм,
+  при этом $\Ker(\pi' \circ \pi) =
+  \pi^{-1}(\pi'^{-1}(e)) = \pi^{-1}(\overline{K}) = K$.
+  Значит,
+  $\overline{G}/\overline{K} =
+  \Img(\pi' \circ \pi) \cong G/\Ker(\pi' \circ \pi) =
+  \Factor{G}[K]$
+  по основной теореме о гомоморфизмах
+  (и $K = \Ker(\pi' \circ \pi) \NSG G$).
+\end{proof}
+
+\begin{example}
+  Пусть $m, n \in \Natural$.
+  Тогда $\Integer \NGS n \Integer \NGS mn \Integer$
+  (и $\Integer \NGS mn \Integer$).
+  Значит, $\Factor{\Integer}[n \Integer] = \Integer_n$,
+  $\Factor{\Integer}[mn \Integer] = \Integer_{mn}$,
+  а $n (\Factor{\Integer}[mn\Integer]) = n \Integer_{mn}$.
+  Следовательно, $\Factor{\Integer_{mn}}[n \Integer_{mn}]
+  = (\Integer/mn\Integer)/
+  (n\Integer/mn\Integer) \cong \Integer/n\Integer = \Integer_n$.
+  Как применить пункты 1 и 2?
+  Все подгруппы $\Integer$ имеют вид $k \Integer$,
+  $k \in \Integer$.
+  Тогда все подгруппы $\Integer_n = \Factor{\Integer}[n \Integer]$
+  есть подгруппы вида $\Factor{k \Integer}[n \Integer]$,
+  где $n \Integer < k \Integer$
+  (т. е. $k \divides n$).
+  Значит, подгруппы в $\Integer_n$ "---
+  это подгруппы вида $(n/k) \Integer_n$,
+  где $k \divides n$,
+  т. е. $l \Integer_n$, где $l \divides n$.
+\end{example}
+
+\end{document}

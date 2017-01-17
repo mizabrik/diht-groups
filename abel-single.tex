@@ -1,0 +1,185 @@
+\documentclass[main]{subfiles}
+
+\begin{document}
+\subsection{Единственность представления}
+Пусть
+\begin{gather}
+  A = \Integer^t \times \Integer_{p_1^{\alpha_1}} \times
+  \dots \times \Integer_{p_s^{\alpha_s}} , \\
+  B = \Integer^u \times \Integer_{q_1^{\beta_1}} \times
+  \dots \times \Integer_{q_r^{\beta_r}},
+\end{gather}
+\( p_i \), \( q_i \) "---
+простые.
+Пусть \( A \cong B \), тогда хотим доказать,
+что \( t = u \), \( r = s \) и наборы
+\( (p_1^{\alpha_1}, \dots, p_s^{\alpha_s}) \) и
+\( (q_1^{\beta_1}, \dots, q_r^{\beta_r}) \) совпадают
+с точностью до перестановки.
+
+\begin{corollary}
+  \( T(A) \cong T(B) \), \( t = u \).
+\end{corollary}
+\begin{proof}
+  Первое утверждение очевидно. Для второго:
+  \( \Integer^t \cong \Factor{A}[T(A)] \cong
+  \Factor{B}[T(B)] \cong \Integer^u \).
+  Итак, в этой группе существует базис из
+  \( t \) и \( u \) элементов \( \To t = u \).
+\end{proof}
+
+В дальнейшем можно считать, что \( A = T(A) \),
+\( B = T(B) \) (т. е. \( t = u = 0 \)).
+
+\begin{proposition}
+  Пусть \( A = \Integer_{p^{\alpha_1}} \times
+  \Integer_{p^{\alpha_2}} \times
+  \dots 
+  \Integer_{p^{\alpha_k}} \times
+  \Integer_{p_2^{\gamma_2}} \times
+  \dots \times \Integer_{p_l^{\gamma_l}} \),
+  где \( p_2, \dots, p_l \) отличны от \( p \).
+  Тогда (единственная) силовская \( p \)-подгруппа
+  в \( A \) есть \( P_p = \Integer_{p^{\alpha_1}} \times
+  \dots \Integer_{p^{\alpha_k}} \times \{ 0 \}^{l-1} \).
+\end{proposition}
+\begin{proof}
+  Ясно, что \( P_p < A \). \( |A| = p^{\alpha_1 + \dots + \alpha_k}
+  \cdot \prod_{i = 2}^l p_i^{\gamma_i} \), а
+  \( |P_p| = p^{\alpha_1 + \dots + \alpha_k} \).
+  Значит, \( P_p \) "--- силовская \( p \)-подгруппа.
+  Наконец, \( P_p \NSG A \To N_p = 1 \).
+\end{proof}
+\begin{corollary}
+  Достаточно доказать совпадение наборов
+  \( (p_i^{\alpha_i}) \) и \( (q_j^{\beta_j}) \)
+  для случая \( p_1 = \dots = p_s = q_1 = \dots = q_r \).
+\end{corollary}
+
+\begin{proposition}
+  Пусть \( A = \Integer_{p^{\alpha_1}} \times
+  \dots \Integer_{p^{\alpha_s}} \),
+  \( B = \Integer_{p^{\beta_1}} \times
+  \dots \Integer_{p^{\beta_r}} \).
+  Тогда, если \( A \cong B \), то
+  наборы \( (\alpha_1, \dots, \alpha_s) \) и
+  \( (\beta_1, \dots, \beta_r) \) совпадают
+  (с точностью до перестановки).
+\end{proposition}
+\begin{proof}
+  Индукция по \( |A| \). Если \( |A| = p \),
+  то \( A \cong B \cong \Integer_p \).
+
+  Пусть \( |A| > p \). Тогда рассмотрим
+  \( pA = p\Integer_{p^{\alpha_1}} \times \dots \times
+  p \Integer_{p^{\alpha_s}}
+  \cong \Integer_{p^{\alpha_1 - 1}}  \times \dots
+  \times \Integer_{p^{\alpha_s - 1}} \) и
+  \( pB = p \Integer_{p^{\beta_1 - 1}} \times \dots \times
+  p \Integer_{p^{\beta_r - 1}} \).
+  Тогда, т. к. \( pA \cong pB \),
+  \( |pA| = |pB| \). Но \(|pA| = \frac{|A|}{p^s} \)
+  и \( |pB| = \frac{|B|}{p^r} \). Итак,
+  \( s = r \).
+
+  Кроме того, к \( pA \) и \( pB \) можно применить предположение
+  индукции, получив, что наборы
+  \( (\alpha_1 - 1, \dots, \alpha_s - 1) \) и
+  \( (\beta_1 - 1, \dots, \beta_r - 1) \) совпадают
+  с точностью до перестановки и, возможно, выкидывания
+  нулей из этих наборов (случай \( \alpha_i - 1 = 0 \)
+  соответствует тривиальному сомножителю \( \Integer_{p^0} \),
+  который можно выкинуть).
+  Но, так как \( s = r \), нулей в них одинаковое количество
+  \( \To \) он совпадают с точностью до перестановки,
+  а значит, совпадают и наборы
+  \( (\alpha_1, \dots, \alpha_s) \) и
+  \( (\beta_1, \dots, \beta_r) \).
+
+  Если \( pA = \{ 0 \} \), то \( \alpha_1 = \dots = \alpha_s = 
+  \beta_1 = \dots = \beta_r = 1 \), и утверждение
+  также верно.
+\end{proof}
+
+\begin{theorem}
+  Пусть \( A \) "--- конечно порождённая абелева группа.
+  Тогда
+  \[
+    A = \Integer^t \times \Integer_{p_1^{\alpha_1}} \times
+    \dots \times \Integer_{p_s^{\alpha_s}},
+  \]
+  где \( t \ge 0 \), \( s \ge 0 \), \( p_i \) "---
+  простые числа, \( \alpha_i \ge 1 \).
+  В любых таких представлениях группы \( A \)
+  совпадают значения \( t \),
+  а также наборы \( (p_1^{\alpha_1}, \dots, p_s^{\alpha_s}) \)
+  (с точностью до перестановки).
+\end{theorem}
+\begin{remark}
+  Таких разложений может быть много.
+  \begin{enumerate}
+    \item В группе \( \Integer^t \) существует много базисов,
+      любой базис \( a_1, \dots, a_t \) даёт прямое
+      разложение \( \Integer^t = \langle a_1 \rangle \times
+      \dots \times \langle a_t \rangle \).
+    \item В группе \( \Integer_p \times \Integer_p \)
+      можно выбрать любые два элемента \( a \) и \( b \),
+      так что \( a \notin \langle b \rangle \),
+      \( b \notin \langle a \rangle \) (тогда \( a, b \ne 0 \)).
+      В таком случае, \( |\langle a, b \rangle| = p^2 \), т. е.
+      \( \langle a, b \rangle = \Integer_p \times \Integer_p =
+      \langle a \rangle \times \langle b \rangle \).
+      По сути, \( \Integer_p^2 \) "--- это двумерное пространство
+      над полем \( \Integer_p \), а \( (a, b) \) "--- базис в нём.
+    \item Пусть \( A = \Integer \times \Integer_2 \).
+      Выберем \( a = (1, 1) \) и \( b = (0, 1) \).
+      Тогда \( \langle a \rangle \cong \Integer \),
+      \( \langle b \rangle \cong \Integer_2 \),
+      и \( A = \langle a \rangle \times \langle b \rangle \).
+      ("<канонический"> выбор "--- это \( (1, 0) \), \( (0, 1) \)).
+  \end{enumerate}
+\end{remark}
+
+\begin{exercise}
+  Мы доказали, что любая конечно порождённая группа \( A \)
+  есть \( A \cong \Integer^t \times \Integer_{m_1} \times
+  \dots \times \Integer_{m_k} \), где \( t \ge 0 \),
+  \( k \ge 0 \), \( m_i > 1 \) и \( m_1 \divides m_2 \divides
+  \dots \divides m_k \).
+  Докажите, что и в этом представлении все параметры
+  восстанавливаются однозначно.
+\end{exercise}
+\begin{remark}
+  Ещё одно следствие из теоремы о существовании согласованных базисов.
+  Пусть \( A = \Integer^k \), \( B \) "--- подгруппа в \( A \),
+  порождённая столбцами  некоторой матрицы \( M = (m_{ij}) \in
+  \Matrices[\Integer]{k}{n} \).
+  Тогда в \( A \) и \( B \) существуют согласованные базисы
+  \( (a_1, \dots, a_k) \) и \( (b_1, \dots, b_l) \) такие, что
+  \( b_i = d_i a_i \), \( d_1 \divides d_2 \divides \dots \divides d_l \).
+
+  Замена базиса в \( A \) соответствует умножению \( M \) на матрицу
+  перехода \( S \in \Matrices[\Integer]{k}{k} \), \( \det S = \pm 1 \).
+  Можно показать, что переход к \( (b_1, \dots, b_l, 0, \dots, 0) \)
+  также можно осуществить с помощью матрицы перехода
+  \( T \in \Matrices[\Integer]{n}{n} \), \( \det T = \pm 1 \).
+  таким образом,
+  \[
+    S M T = Diag(d_1, d_2, \dots, d_l, 0, \dots).
+  \]
+  Полученная матрица называется \emph{смитовой нормальной формой}
+  матрицы \( M \).
+  В этом случае \( \Factor{A}[B] = \Integer_{d_1} \times \dots
+  \times \Integer_{d_l} \times \Integer^{k - l} \),
+  где \( d_1, \dots, d_l \) определяются однозначно.
+  Таким образом, смитова нормальная форма матрицы \( M \)
+  единственна.
+\end{remark}
+
+\begin{exercise}
+  Восполните пробелы.
+\end{exercise}
+\begin{exercise}
+  \( d_i = \GCD(\text{миноры матрицы \( M \) порядка \( i \)}) \).
+\end{exercise}
+\end{document}

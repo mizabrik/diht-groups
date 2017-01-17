@@ -1,0 +1,305 @@
+\documentclass[main]{subfiles}
+
+\begin{document}
+
+Как задать группу $\Integer_n$ "--- циклическую группу из
+$n$ элементов? Можно сказать, что она порождается одним элементом порядка
+$n$, а образующие и соотношения позволят записать это как
+$\Integer_n \cong \GenGroup{a}[a^n = e]$.
+
+
+\section{Свободные группы}
+\begin{definition}
+  Пусть $F_n = \langle f_1, \dots, f_n \rangle$ "--- группа.
+  Она называется \emph{свободной со свободными порождающими
+  $f_1, \dots, f_n$}, если выполняется универсальное свойство:
+  для любой группы $G$ и любых $g_1, \dots, g_n \in G$ существует
+  гомоморфизм $\phi : F_n \to G$ такой, что
+  $\phi(f_i) = g_i$, $i = 1, \dots, n$.
+\end{definition}
+
+\begin{remark}
+  Такой гомоморфизм $\phi$ единственен.
+\end{remark}
+
+\begin{remark}
+  Если $G = \langle g_1, \dots, g_n \rangle$, то $\phi$ сюрьективен,
+  т. е. $G \cong F_n/\Ker \phi$.
+\end{remark}
+
+Пусть $f_1, \dots, f_n$ "--- $n$ различных символов.
+Выберем алфавит $A = \{ f_1, \dots, f_n, f_1^{-1}, \dots, f_n^{-1} \}$.
+Теперь пусть $F_n$ "--- множество всех слов в алфавите $A$
+(включая пустое слово $\Lambda$), в которые не входят
+подслова вида $f_i^{-1} f_i$ и $f_i f_i^{-1}$.
+
+\begin{example}
+  При $n = 1$ эти слова будут иметь вид $\Lambda$,
+  $\underbrace{f_1 f_1 \dots f_1}_k$ и
+  $\underbrace{f_1^{-1} \dots f_1^{-1}}_k$.
+\end{example}
+\begin{example}
+  При $n = 2$
+  $f_1 f_2 f_2 f_1^{-1} \in F_n$,
+  а $f_1 f_2 f_2^{-1} \notin F_n$.
+\end{example}
+
+Введём операцию:
+если $w_1, w_2 \in F_n$,
+то $w_1 \cdot w_2$ есть их конкатенация
+в которой осуществим "<сокращения">
+взаимнообратных букв на стыке слов,
+тогда $w_1 \cdot w_2 \in F_n$.
+
+\begin{example}
+  $(f_1 f_2 f_3) \cdot (f_3^{-1} f_2^{-1} f_1) = f_1 f_1$.
+\end{example}
+
+\begin{theorem}
+  $(F_n, \cdot)$ "--- свободная группа со свободными образующими
+  $f_1, \dots, f_n$.
+\end{theorem}
+\begin{proof}
+  Для начала, покажем, что $(F_n, \cdot)$ "--- группа.
+  \begin{enumerate}
+    \item Нейтральный элемент "--- $\Lambda$:
+      $\Lambda \cdot w = w \cdot \Lambda = w$
+    \item Если
+      $w = f_{i_1}^{\epsilon_1} \cdot \dots \cdot f_{i_k}^{\epsilon_k}$,
+      то $w^{-1} = f_{i_k}^{-\epsilon_k} \cdot \dots \cdot f_{i_1}^{-\epsilon_1}
+      \in F_n$, а $w \cdot w^{-1} = \Lambda = w^{-1} \cdot w$.
+    \item Пусть $a, b, c \in F_n$.
+      Пусть при перемножении $a \cdot b$
+      сокращается $p \cdot p^{-1}$,
+      а при перемножении $b \cdot c$ "---
+      $q \cdot q^{-1}$.
+
+      Пусть в слове \( b \)
+      подслова $p^{-1}$ и $q$ не пересекаются,
+      и между ними есть хотя бы один символ.
+      Тогда $b = p^{-1} b' q$,
+      $a = a'p$, $c = q^{-1}c'$, и $b' \ne \Lambda$
+      (тут используется просто конкатенация).
+      Значит, $ab = a' p \cdot p^{-1} b' q = a'b'q$,
+      $b \cdot c = p^{-1} b' c'$, $(a \cdot b) \cdot c =
+      a' b' q \cdot q^{-1} c' = a' b' c' = a' p \cdot p^{-1} b' c'
+      = a \cdot (b \cdot c)$.
+      
+      Пусть теперь $p^{-1}$ и $q$
+      пересекаются или \( b = p^{-1} q \),
+      тогда $b = r b' s$, $p^{-1} = rb'$, $q = b's$
+      (возможно, $b'$ пусто).
+      В этом случае $a = a' b'^{-1} r^{-1}$,
+      $c = s^{-1} b'^{-1} c'$.
+      Тогда $a \cdot b = a' b'^{-1} r^{-1} \cdot r b' s = a' s$,
+      $b \cdot c = r c'$;
+      $(a \cdot b) \cdot c = a' s \cdot s^{-1} b'^{-1}
+      c' = a' \cdot b'^{-1} c'$,
+      а $a \cdot (b \cdot c) = a' b'^{-1} r^{-1} \cdot r c' =
+      a' b'^{-1} \cdot c'$.
+      Если $b' \ne \Lambda$,
+      дальше сокращений не будет,
+      т. к. $a' b'^{-1}, b'^{-1} c' \in F_n$
+      как фрагменты слов без сокращений,
+      и тогда оба слова есть $a' b'^{-1} c'$.
+      Если же $b' = \Lambda$, оба слова равны $a' \cdot c'$.
+  \end{enumerate}
+  
+  Теперь докажем свободность.
+  Ясно, что $F_n = \langle f_1, \dots, f_n \rangle$.
+  Далее, если $g_1, \dots, g_n \in G$
+  определим $\phi : F_n \to G$,
+  $\phi(\Lambda) = e$,
+  $\phi(f_{i_1}^{\epsilon_1} \dots f_{i_k}^{\epsilon_k})
+  = g_{i_1}^{\epsilon_1} \dots g_{i_k}^{\epsilon_k}$.
+  Тогда, если $w_1, w_2 \in F_n$, имеем
+  $\phi(w_1) \cdot \phi(w_2) =
+  w_1(g_1, \dots, g_n) \cdot w_2(g_1, \dots, g_n) =
+  \phi(w_1 \cdot w_2)$
+  (здесь скобки обозначают подстановку вместо $f_1, \dots, f_n$).
+  Тогда $\phi$ "--- требуемый гомоморфизм
+  ($\phi(f_i) = g_i$).
+\end{proof}
+
+\begin{remark}
+  Аналогичным образом строится и свободная группа с множеством
+  свободных образующих произвольной мощности.
+\end{remark}
+
+\begin{proposition}
+  Пусть $F_n$ и $G_n$ "--- две свободные группы
+  с $n$ свободными образующими каждая.
+  Тогда $F_n \cong G_n$
+  (и существует изоморфизм,
+  переводящий свободные образующие в свободные образующие).
+\end{proposition}
+\begin{proof}
+  Пусть $f_1, \dots, f_n$ "--- свободные образующие в $F_n$,
+  $g_1, \dots, g_n$ "--- в группе $G$.
+  Тогда существуют гомоморфизмы
+  $\phi: F_n \to G_n$ и $\psi : G_n \to F_n$,
+  при том $\phi(f_i) = g_i$, $\psi(g_i) = f_i$.
+  Их композиция "--- гомоморфизм
+  $\phi \circ \psi : G_n \to G_n$,
+  при этом
+  $\phi \circ \psi (g_i) = g_i$, а тогда
+  $\phi \circ \psi = id_{G_n}$
+  (т. к. $G_n = \langle g_1, \dots, g_n \rangle$).
+  Аналогично,
+  $\psi \circ \phi = id_{F_n}$
+  $\To$ $\phi$, $\psi$ "--- изоморфизмы.
+\end{proof}
+
+\begin{remark}
+  $F_1 = \langle f_1 \rangle \cong \Integer$.
+\end{remark}
+
+\begin{proposition}
+  Для $n \ge 2$ $F_n$ "--- не абелева.
+\end{proposition}
+\begin{proof}
+  Существует $G$ такая, что $\Exists{g_1, g_2 \in G}
+  g_1 g_2 \ne g_2 g_1$.
+  С другой стороны, существует $\phi : F_n \to G$,
+  $\phi(f_1) = g_1$ и $\phi(f_2) = g_2$,
+  а значит $\phi(f_1 f_2) = g_1 g_2 \ne g_2 g_1 = \phi(f_2 f_1)$,
+  тогда \( f_1 f_2 \ne f_2 f_1 \),
+  т. е. $F_n$ "--- не абелева.
+\end{proof}
+
+\begin{exercise} %*
+  Пусть $G = SL_2(\Integer[x])$, тогда
+  $$F_2 \cong \langle
+  \begin{pmatrix} 1 & x \\ 0 & 1\end{pmatrix},
+    \begin{pmatrix} 1 & 0 \\ x & 1\end{pmatrix}
+      \rangle < G.$$
+\end{exercise}
+
+\section{Соотношения}
+\begin{definition}
+  Пусть $G = \langle g_1, \dots, g_n \rangle$ "--- группа,
+  $F_n = \GenFGroup{f_1, \dots, f_n}$ "--- свободная группа,
+  а $w_1, \dots, w_k \in F_n$.
+  Обозначим через $w_i(g_1, \dots, g_n)$
+  слово, полученное заменой
+  $f_i$ на $g_i$ и $f_i^{-1}$ на $g_i^{-1}$.
+  Пусть $K = \GenNGroup{w_1, \dots, w_k}$,
+  $\phi : F_n \to G$ "--- гомоморфизм, $\phi(f_i) = g_i$.
+  Тогда \emph{$G$ задана образующими $g_1, \dots, g_n$ с соотношениями
+  $w_i(g_1, \dots, g_n) = e$}, если $\Ker \phi = K$.
+  Обозначение:
+  \[
+    G = \GenGroup{g_1, \dots, g_n}[w_1(g_1, \dots, g_n) = e,
+    \dots, w_k(g_1, \dots, g_n) = e].
+  \]
+\end{definition}
+
+\begin{remark}
+  $G = \Img \phi \cong \Factor{F_n}[K]$. Наоборот, если $G = \Factor{F_n}[K]$, $g_i = f_i K$,
+  то
+  \[
+    G = \GenGroup{g_1, \dots, g_n}[w_1(g_1, \dots, g_n) = e,
+    \dots, w_k(g_1, \dots, g_n) = e].
+  \]
+\end{remark}
+
+\begin{remark}
+  Вопрос о том, тривиальна ли $G$
+  (или равны ли в $G$ два элемента),
+  алгоритмически не разрешим.
+\end{remark}
+
+\begin{theorem}[универсальное свойство группы, заданной образующими
+  и соотношениями]
+  Пусть $G = \GenGroup{g_1, \dots, g_n}[w_i(g_1, \dots, g_n) = e]$.
+  Пусть $H$ "--- группа,
+  $h_1, \dots, h_n \in H$
+  и $w_i(h_1, \dots, h_n) =e$.
+  Тогда существует гомоморфизм
+  $\theta : G \to H$,
+  $\theta(g_i) = h_i$.
+\end{theorem}
+\begin{proof}
+  Пусть $\phi : F_n \to G$, $\phi(f_i) = g_i$;
+  $\psi: F_n \to H$, $\psi(f_i) = h_i$.
+  Пусть $K = \Ker \phi = \GenNGroup{w_1, \dots, w_k}$,
+  пусть $L = \Ker \psi$.
+  Тогда $K, L \NSG F_n$.
+  Более того, 
+  \[
+    w_i \in L \To
+    L > \GenNGroup{w_1, \dots, w_k} = K.
+  \]
+  Значит,
+  $\Img \psi \cong \Factor{F_n}[L] \cong
+  \Factor{(\Factor{F_n}[K])}[(\Factor{L}[K])]
+  \cong \Factor{G}[G_1]$,
+  где $G_1 \NSG G$,
+  по второй теореме об изоморфизме,
+  и при этом изоморфизме элементы
+  $g_i G_1$ соответствуют элементам $h_i$.
+  Значит, канонический эпиморфизм
+  $\pi : G \to \Factor{G}[G_1] \cong \Img \psi$ "---
+  это требуемый гомоморфизм.
+\end{proof}
+
+\begin{example}
+  $G = \GenGroup{a, b}[a^2 = b^2 = (ab)^2 = e]$.
+  Пусть $g \in G$. Тогда $g = a^{i_1} b^{j_1} a^{i_2} \dots$,
+  $i_k, j_k \in \Integer$. Можно считать, что $i_k, j_k \in \{0, 1\}$.
+  Значит, $g = aba\dots$ или $g = baba\dots$. Наконец, $abab = e$,
+  длина произведения, можно считать, меньше четырёх:
+  $abab = e = baba = b(abab)b^{-1}$.
+  Итак, элементы нашей группы "--- только
+  $e$, $a$, $b$, $ab$, $ba$, $aba$, $bab$.
+  Далее, $aba = (abab)b^{-1} = b^{-1} = b$ и $bab = a$,
+  $ab = (abab) b^{-1} a^{-1} = ba$. Итого, $G = \{ e, a, b, ab \}$
+  (не факт, что они различны). Почему не меньше?
+  Рассмотрим $H = \Integer_2 \times \Integer_2$,
+  $a' = (1, 0)$, $b' = (0, 1)$. Тогда
+  $a'^2 = b'^2 = (a'b')^2 = e$ "--- все соотношения выполнены.
+  По универсальному свойству
+  существует $\phi : G \to H$, $\phi(a) = a'$,
+  $\phi(b) = b'$,
+  при этом $\Img \phi = \GenGroup{\phi(a), \phi(b)}
+  = \GenGroup{a', b'} = H$. Итак, $|\Img \phi| = 4 \To |G| \ge 4$.
+  Значит, $|G| = 4 \To \phi$ "--- изоморфизм.
+  Итак, $G \cong \Integer_2 \times \Integer_2$.
+\end{example}
+\begin{remark}
+  Можно было бы построить группу $H$ иначе: $H = \{ e, a, b, ab \}$
+  и вычислить таблицу умножения: например, $a \cdot ab = b$,
+  $ab \cdot a = aba = b$.
+\end{remark}
+
+\begin{example}
+  Рассмотрим группу кватернионов:
+  \[
+    Q_8 = \GenGroup{a, b}[a^4 = e, a^2 = b^2, bab^{-1} = a^{-1}]
+  \]
+  ($a^2 = b^2$ значит то же, что и $a^2 b^{-2} = e$).
+  В этом случае можем любой элемент записать как $h = a^{i_1} b^{j_1}\dots$,
+  $i_k \in \{ 0, 1, 2 \}$ и $j_k \in \{ 0, 1 \}$ (ибо $a^2 = b^2$).
+  Итак, $g = a^{i_1} b a^{i_2} b \dots$. Если элементов $b$ хотя бы два, можно
+  воспользоваться $ba = a^{-1} b = a^3 b$. Отсюда
+  $ba^k b = a^{3k} b^2 = a^{3k + 2}$. Итого, $g = a^i$ или $g = a^{i_1} b a^{i_2}
+  = a^{j} b$. Итак, $|Q_8| \le 8$.
+
+  Рассмотрим группу $\Matrices[\Complex]{2}{2}$
+  и её элементы $A = \begin{psmallmatrix} i & 0 \\ 0 & -i \end{psmallmatrix}$,
+  $B = \begin{psmallmatrix} 0 & 1 \\ -1 & 0 \end{psmallmatrix}$.
+  Тогда
+  $A^2 = -E = B^2$, $A^4 = E$,
+  $BA = \begin{psmallmatrix} 0 & -i \\ -i & 0 \end{psmallmatrix} = A^{-1} B$.
+  Значит, существует гомоморфизм
+  \( \phi : Q_8 \to \Matrices[\Complex]{2}{2} \),
+  для которого \( \phi(a) = A \), \( \phi(b) = B \)
+  и, следовательно, $|Q_8| \ge |\Img \phi| \ge 8$:
+  $\Img \phi > \langle A \rangle$,
+  $\Img \phi \ni B \notin \langle A \rangle$.
+  
+  Итак, $|\Img \phi| = 8 = |Q_8|$,
+  и $Q_8 \cong \Img \phi = \GenGroup{A, B}$.
+\end{example}
+
+\end{document}

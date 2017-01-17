@@ -1,0 +1,222 @@
+\documentclass[main]{subfiles}
+
+\begin{document}
+
+\section{Коммутант}
+\begin{definition}
+  Пусть \( G \) "--- группа, \( x, y \in G \).
+  \emph{Коммутатором} этих элементов
+  называется \( [x, y] = xyx^{-1}y^{-1} \).
+\end{definition}
+
+\begin{proposition}
+  Для любых \( x, y \in G \) верно:
+  \begin{enumerate}
+    \item \( xy = yx \oTTo [x, y] = e \)
+    \item \( xy = [x, y] yx \)
+    \item \( [x, y]^{-1} = [y, x] \)
+    \item \( [x, y]^g = [x^g, y^g] \)
+  \end{enumerate}
+\end{proposition}
+\begin{proof}~
+  \begin{enumerate}
+    \item Следует из следующего свойства.
+    \item \( [x, y] \cdot yx = xy x^{-1} y^{-1} yx = xy \).
+    \item \( [x, y]^{-1} = y x y^{-1} x^{-1} = [y, x] \).
+    \item Следует из того, что сопряжение "--- автоморфизм.
+  \end{enumerate}
+\end{proof}
+
+\begin{remark}
+  Если \( \phi : G \to A \) "--- гомоморфизм
+  в абелеву группу \( A \), то
+  \( \phi([x, y]) = [\phi(x), \phi(y)] = e \).
+\end{remark}
+
+\begin{definition}
+  Пусть \( G \) "--- группа, тогда
+  \( G' = \langle \{ [x, y] \mid x, y \in G \} \rangle \)
+  называется \emph{коммутантом} группы \( G \).
+\end{definition}
+
+Более общо: если \( K, H < G \), то
+их взаимным коммутантом называется
+подгруппа \( [K, H] = \langle
+\{ [k, h] \mid k \in K, h \in H \} \rangle \).
+Таким образом, \( G' = [G, G] \).
+
+\begin{remark}
+  \( \{ [x, y] \mid x, y \in G \} \) не обязательно
+  является подгруппой в \( G \).
+\end{remark}
+\begin{exercise}
+  Привести соответствующий пример.
+\end{exercise}
+
+\begin{proposition}
+  Пусть \( \phi : G \to H \) "--- гомоморфизм групп.
+  Тогда \( \phi(G') < H' \).
+  Более того, если \( \phi \) "--- эпиморфизм,
+  то \( \phi(G') = H' \).
+\end{proposition}
+\begin{proof}
+  Для любых \( x, y \)
+  \( \phi([x, y]) = [\phi(x), \phi(y)] \in H' \).
+  Значит, \( \phi(\{ [x,y] \mid x, y \in G \}) \subseteq H' \To
+  \phi(G') = \langle \{ \phi([x, y]) \mid x, y \in G \} \rangle
+  \subseteq H' \).
+  Если же \( \phi \) "--- эпиморфизм, то
+  \( \Forall{a, b \in H} \Exists{x, y \in G}
+  \phi(x) = a, \phi(y) = b \).
+  Тогда \( [a, b] = \phi([x, y]) \in \phi(G') \To
+  H' \subseteq \phi(G') \To \phi(G') = H' \).
+\end{proof}
+
+\begin{corollary}
+  \( K \NSG G \To K' \NSG G \).
+\end{corollary}
+\begin{proof}
+  Пусть \( g \in G \), \( I_g \in \Aut G \),
+  \( I_g(x) = x^{g^{-1}} \).
+  Тогда, т. к. \( K \NSG G \),
+  то \( I_g(K) = K \), т. е.
+  \( I_g \bigr|_K : K \to K \) "---
+  автоморфизм группы \( K \).
+  Значит, \( I_g(K') = K' \), т. е.
+  \( g K' g^{-1} = K' \To K' \NSG G \).
+\end{proof}
+
+\begin{definition}
+  \( G'' = (G')' \), по индукции,
+  \( G^{(n)} = (G^{(n-1)})' \).
+  Подгруппа \( G^{(n)} \) называется
+  \emph{\(n\)-м коммутантом} группы \( G \).
+\end{definition}
+
+\begin{corollary}
+  \( G' \NSG G \); более того, \( G^{(n)} \NSG G \).
+\end{corollary}
+\begin{proof}
+  Индукция по \( n \). При \( n = 0 \),
+  \( G \NSG G \). Шаг индукции "---
+  предыдущее следствие.
+\end{proof}
+
+\begin{theorem}
+  Для группы \( G \) верно:
+  \begin{enumerate}
+    \item \( \Factor{G}[G'] \) "--- абелева группа.
+    \item Если \( G' < K < G \), то \( K \NSG G \).
+    \item Если \( K \NSG G \), причём \( \Factor{G}[K] \) "---
+      абелева, то \( G' < K \).
+  \end{enumerate}
+\end{theorem}
+\begin{remark}
+  Это значит, что \( G' \) "--- наименьшая  по
+  включению нормальная подгруппа,
+  факторгруппа по которой Абелева.
+\end{remark}
+\begin{proof}~
+  \begin{enumerate}
+    \item Пусть \( \pi : G \to \Factor{G}[G'] \) "---
+      канонический эпиморфизм, тогда
+      \( \Forall{x, y \in G} [\pi(x), \pi(y)] =
+      \pi([x, y]) = e \To \)
+      \( \pi(x) \) и \( \pi(y) \) коммутируют.
+      Поскольку \( \pi \) "--- эпиморфизм,
+      то \( \Factor{G}[G'] \) "--- абелева.
+    \item Рассмотрим \( \pi(K) = \Factor{K}[G'] <
+      \Factor{G}[G'] \). Поскольку \( \Factor{G}[G'] \) "---
+      абелева, то \( \Factor{K}[G'] \NSG \Factor{G}[G'] \), и
+      по второй теореме об изоморфизме \( K \NSG G \).
+    \item Пусть \( \Factor{G}[K] \) "--- абелева.
+      Рассмотрим канонический эпиморфизм
+      \( \pi' : G \to \Factor{G}[K] \).
+      Тогда \( \pi'([x, y]) = [\pi'(x), \pi'(y)] = e \To
+      [x, y] \in \Ker \pi' = K \) для произвольных
+      \( x, y \in G \). Значит, \( G' < K \).
+  \end{enumerate}
+\end{proof}
+
+\begin{remark}
+  Наоборот, если \( G' < K < G \),то
+  \( \Factor{G}[K] \cong
+  \Factor{(\Factor{G}[G'])}[(\Factor{K}[G'])] \) "---
+  абелева.
+\end{remark}
+\begin{remark}
+  В конце доказательства мы, по сути, увидели,
+  что для любого гомоморфизма \( \phi : G \to A \),
+  где \( A \) "--- абелева, \( \Ker \phi > G' \).
+\end{remark}
+
+% 2016-10-13
+\begin{exercise}
+  Пусть $H \NSG G$, $K = [G, H]$. Тогда $K$ "--- наименьшая
+  подгруппа такая, что $\Factor{H}[K] < Z(\Factor{G}[K])$.
+\end{exercise}
+
+\begin{definition}
+  Пусть $G$ "--- группа, $M \subseteq G$.
+  Тогда \emph{нормальная подгруппа, порождённая множеством $M$},
+  есть
+  \[
+    \GenNGroup{M} =
+    \bigcap_{H \NSG G, M \subseteq H} H.
+  \]
+\end{definition}
+
+\begin{proposition}
+  $\GenNGroup{M} = \GenGroup{M^G}$,
+  где $M^G = \{ m^g \mid m \in M, g \in G \}$.
+\end{proposition}
+\begin{proof}
+  Если $H \NSG G$, $M \subseteq H$, то
+  $M^G \subseteq H$.
+  Значит,
+  $\GenGroup{M^G} =
+  \bigcap_{H < G, H \supseteq M^G} H \subseteq
+  \bigcap_{H \NSG G,  H\supseteq M} H =
+  \GenNGroup{M}$.
+  Наоборот, $\GenGroup{M^G} \NSG G$,
+  т. к. $\Forall{g \in G}
+  \langle M^G \rangle^g = \langle M^{Gg} \rangle =
+  \langle M^G \rangle$,
+  поэтому $\GenNGroup{M} \subseteq \GenGroup{M^G}$.
+\end{proof}
+
+\begin{proposition}
+  Пусть $G = \GenGroup{M}$.
+  Тогда $G' = \GenNGroup{\{ [m_1, m_2] \mid
+  m_1, m_2 \in M \}}$.
+\end{proposition}
+\begin{proof}
+  Обозначим правую часть равенства через $H$.
+  Раз $G' \NSG G$
+  и $[m_1,m_2] \in G'$
+  для любых \( m_1, m_2 \in M \),
+  получаем $H < G'$.
+
+  Наоборот, рассмотрим $G/H$
+  и канонический эпиморфизм $\pi: G \to G/H$;
+  $[\pi(m_1), \pi(m_2)] = \pi([m_1,m_2]) = e$
+  для произвольных \( m_1, m_2 \in M \).
+  Итак, $G/H = \langle \pi(M) \rangle$,
+  и любые два элемента из $\pi(M)$ коммутируют.
+  Значит, $G/H$ "--- абелева,
+  откуда $G' < H$.
+
+  Значит, $G' = H$.
+\end{proof}
+
+\begin{exercise}
+  Приведите пример,
+  когда $G' \ne \GenGroup{\{ [m_1, m_2] \mid m_1, m_2 \in M \}}$.
+\end{exercise}
+
+\begin{remark}
+  Для группы $G$ обе подгруппы $Z(G)$ и $G'$ показывают, насколько "<далека"> $G$
+  от абелевой.
+\end{remark}
+
+\end{document}

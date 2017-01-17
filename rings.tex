@@ -1,0 +1,383 @@
+\documentclass[main]{subfiles}
+
+\begin{document}
+\section{Базовые понятия теории колец}
+\begin{definition}
+  Кольцо "--- это множество с двумя операциями
+  \( (R, +, \cdot) \), для которых выполняются
+  следующие свойства:
+  \begin{enumerate}
+    \item \( (R, +) \) "--- абелева группа
+    \item \( a \cdot (b \cdot c) = (a \cdot b) \cdot c \)
+    \item \( a \cdot (b + c) = a \cdot b + a \cdot c \) и
+      \( (a + b) \cdot c = a \cdot c + b \cdot c \)
+  \end{enumerate}
+
+  Кольцо \emph{коммутативно}, если
+  \( \Forall{a, b \in R} a \cdot b = b \cdot a \).
+
+  Кольцо "--- \emph{с единицей}, если
+  \( \Exists{1 \in R} \Forall{a \in R} 1 \cdot a = a \cdot 1 = a \).
+\end{definition}
+
+\begin{definition}
+  Кольцо с единицей называется
+  \emph{алгеброй} на полем \( F \),
+  если \( F \subseteq R \) и
+  \( \Forall{a \in R} \Forall{f \in F} af = fa \).
+  В этом случае \( R \) "--- линейное пространство
+  над \( F \).
+  \emph{Размерность} алгебры "--- размерность этого
+  линейного пространства.
+\end{definition}
+
+\begin{examples}~
+  \begin{enumerate}
+    \item Любое поле \( F \) "--- алгебра над
+      \( F \) (а также над простым подполем
+      \( \Rational \) или \( \Integer_p \)).
+    \item \( F[x] \) "--- алгебра над \( F \).
+    \item \( \Matrices[F]{m}{m} \) "---
+      некоммутативная алгебра над \( F \)
+      (отождествляем элементы \( \lambda \in F \)
+      со скалярными матрицами \( \lambda E \)).
+  \end{enumerate}
+\end{examples}
+
+\begin{definition}
+  Пусть \( R, S \) "--- кольца. Отображение
+  \( \phi : R \to S \), если
+  \[
+    \Forall{a, b \in R} \phi(a + b) = \phi(a) + \phi(b),
+    \phi(ab) = \phi(a) \phi(b)
+  \]
+\end{definition}
+\begin{remark}
+  \( \phi \) "--- гомоморфизм абелевых групп
+  \( (R, +) \) и \( (S, +) \). В частности,
+  \( \phi(0) = 0 \) и \( \phi(-a) = -\phi(a) \).
+\end{remark}
+
+\begin{definition}
+  Пусть \( \phi : R \to S \) "--- гомоморфизм колец.
+  \emph{Образ} \( \Img \phi = \phi(R) \), его
+  \emph{ядро} \( \Ker \phi = \phi^{-1}(0) \).
+\end{definition}
+\begin{remark}
+  \( \Img \phi \) "--- подкольцо в \( S \).
+\end{remark}
+
+\begin{definition}
+  Пусть \( \emptyset \ne I \subseteq R \).
+  \( I \) называется \emph{идеалом} кольца
+  \( R \) (запись: \( I \NSG R \)),
+  если \( I \) "--- подгруппа в \( (R, +) \)
+  и \( \Forall{a \in R} a I \subseteq I \supseteq Ia \).
+\end{definition}
+
+\begin{proposition}
+  Пусть \( \phi : R \to S \) "--- гомоморфизм колец, тогда
+  \( \Ker \phi \NSG R \).
+\end{proposition}
+\begin{proof}
+  Т. к. \( \phi \) "--- гомоморфизм колец, то \( \phi \) "---
+  гомоморфизм аддитивных групп этих колец, т. е.
+  \( \Ker \phi < (R, +) \).
+  Пусть теперь \( b \in \Ker \phi \), \( a \in R \).
+  Тогда \( \phi(ab) = \phi(a) \phi(b) = \phi(a) \cdot 0 = 0 \),
+  т. е. \( ab \in \Ker \phi \To a \cdot \Ker \phi \subseteq \Ker \phi \).
+  Аналогично, \( (\Ker \phi) \cdot a \subseteq \Ker \phi \).
+\end{proof}
+
+Пусть \( R \) "--- кольцо, \( I \NSG R \).
+Тогда \( (\Factor{R}[I], +) \) "--- группа.
+Определим на \( \Factor{R}[I] \) умножение:
+\[
+  (a + I) \cdot (b + I) = ab + I.
+\]
+
+\begin{remark}
+  Произведение множеств \( a + I \) и \( b + I \) "---
+  не обязательно \( ab + I \)!
+\end{remark}
+\begin{exercise}
+  \( (a + I)(b + I) \subseteq ab + I \)
+\end{exercise}
+
+Проверим корректность умножения.
+Пусть \( b + I = b' + I \) (\( \oTTo b - b' \in I \)).
+Значит, \( a(b - b') = ab - ab' \in I \To
+ab + I = ab' + I \). Итак, от выбора представителя
+\( b \) в \( b + I \) произведение не зависит.
+Аналогично¸ оно не зависит от выбора представителя
+в \( a + I \).
+
+\begin{theorem}
+  Пусть \( I \NSG R \). Тогда \( (\Factor{R}[I], +, \cdot) \) "---
+  кольцо. При этом существует канонический эпиморфизм колец
+  \( \pi : R \to \Factor{R}[I] \), \( \pi(a) = a + I \).
+\end{theorem}
+\begin{proof}
+  Все аксиомы кольца проверяются рутинным образом.
+  Например, дистрибутивность:
+  \begin{align}
+    (a + I) \cdot ((b + I) + (c + I)) &=
+    (a + I) \cdot ((b + c) + I) =
+    a(b + c) + I = (ab + ac) + I = \\
+    &= (ab + I) + (ac + I) =
+    (a + I) \cdot (b + I) + (a + I) \cdot (c + I).
+  \end{align}
+
+  Аналогично, проверка того, что \( \pi \) "---
+  эпиморфизм, рутинна.
+\end{proof}
+
+\begin{definition}
+  Кольцо \( (\Factor{R}[I], +, \cdot) \), описанное выше,
+  называется \emph{факторкольцом} \( R \) по идеалу \( I \).
+\end{definition}
+
+\begin{theorem}[основная теорема о гомоморфизмах колец]
+  Пусть \( \phi : R \to S \) "--- гомоморфизм колец.
+  Тогда \( \Ker \phi \NSG R \), \( \Img \phi \) "---
+  подкольцо в \( S \) и при этом
+  \[
+    \Img \phi \cong \Factor{R}[\Ker \phi].
+  \]
+\end{theorem}
+\begin{proof}
+  \( \phi \) "--- это также гомоморфизм аддитивных групп,
+  поэтому \( \Img \phi \cong \Factor{R}[\Ker \phi] \) как
+  абелевы группы. Этот изоморфизм задаётся
+  \( \psi : \Img \phi \to \Factor{R}[\Ker \phi] \),
+  \( \psi(x) = \phi^{-1}(x) \).
+
+  Теперь осталось проверить, что \( \psi \) сохраняет
+  умножение. Пусть \( x = \phi(a) \), \( y = \phi(b) \).
+  Тогда \( xy = \phi(ab) \To \psi(x) = a + I \),
+  \( \psi(y) = b + I \) и \( \psi(xy) = ab + I = (a + I)(b + I) \),
+  что и требовалось.
+\end{proof}
+\begin{remark}
+  Существуют аналоги первой и второй теоремы об изоморфизмах.
+\end{remark}
+
+\begin{definition}
+  Пусть \( R \) "--- кольцо, \( I \NSG R \).
+  Тогда \( I \) называется \emph{максимальным} идеалом,
+  если
+  \begin{enumerate}
+    \item \( I \ne R \).
+    \item Если \( J \NSG R \) и \( I \subset J \),
+      то \( J = I \) или \( J = R \).
+  \end{enumerate}
+\end{definition}
+
+\begin{proposition}
+  Пусть \( R \) "--- коммутативное кольцо с единицей,
+  \( I \) "--- максимальный идеал в \( R \).
+  Тогда \( \Factor{R}[I] \) "--- поле.
+\end{proposition}
+\begin{proof}
+  \( \Factor{R}[I] \) "--- кольцо, при этом \( R \ne I \To
+  \Factor{R}[I] \) состоит более чем из одного элемента.
+  Заметим: \( 1 \ne I \) (иначе \( I \supseteq RI \supseteq R \cdot 1 = R \)).
+  Значит, \( 1 + I \ne I \) "--- единица кольца
+  \( \Factor{R}[I] \).
+
+  Осталось проверить: любой \( a + I \in \Factor{R}[I]
+  \setminus \{ I \} \) обратим.
+  Пусть \( J = I + aR \). Тогда \( J \NSG R \),
+  \( I \subseteq J \) и \( a \in J \setminus I \).
+  Значит, \( J \ne I \To J = R \).
+  Значит, \( 1 \in J \), т. е. \( 1 = x + ab \),
+  \( x \in I \), \( b \in R \).
+  Тогда
+  \[
+    (a + I) \cdot (b + I) = ab + I = ab + x + I = 1 + I.
+  \]
+  Значит, \( a + I \) обратим.
+\end{proof}
+
+\begin{remark}
+  Для коммутативных колец без единицы утверждение также верно.
+\end{remark}
+\begin{remark}
+  Для некоммутативных колец утверждение неверно;
+  более того, ненулевые элементы факторкольца
+  не обязательно обратимы.
+  Например, в \( \Matrices[F]{n}{n} \) нет
+  нетривиальных идеалов \( \To 0 \NSG \Matrices[F]{n}{n} \) "---
+  максимален!
+\end{remark}
+
+\begin{definition}
+  Пусть \( a_1, \dots, a_n \in R \).
+  Тогда идеал, \emph{порождённый} этими элементами
+  это
+  \[
+    (a_1, \dots a_n) = \bigcap_{I \NSG R, a_i \in I} I.
+  \]
+  Идеал называется \emph{главным}, если он
+  порождён одним элементом.
+\end{definition}
+
+\begin{remark}
+  Если \( R \) "--- коммутативное кольцо с единицей,
+  то
+  \[
+    (a_1, \dots, a_n) = a_1 R + \dots + a_n R.
+  \]
+\end{remark}
+\begin{exercise}
+  Опишите \( (a_1, \dots, a_n) \) в некоммутативном кольце
+  (с единицей).
+\end{exercise}
+
+\begin{theorem}
+  Пусть \( F \) "--- поле, \( R = F[x] \),
+  \( I \NSG R \). Тогда
+  \begin{enumerate}
+    \item \( I \) "--- главный (т. е. \( I = (f) \), \( f \in R\)).
+    \item \( I \) максимален \( \oTTo \) \( f \) неприводим
+      (над \( F \)).
+  \end{enumerate}
+\end{theorem}
+\begin{proof}
+  Если \( I = 0 \), то \( I = (0) \).
+  Пусть \( I \ne 0 \) и пусть \( f \) "--- ненулевой многочлен
+  наименьшей степени, лежащий в \( I \).
+  Тогда \( (f) \subseteq I \).
+  Пусть \( g \in I \), тогда \( g = qf + r \), где
+  \( q, r \in R \), \( \deg r < \deg f \). Заметим,
+  что \( r = g - qf \in I \To r = 0 \) (иначе,
+  это противоречит выбору \( f \)).
+  Значит, \( g = qf \in (f) \To I \subseteq (f) \).
+  Итак, \( (f) = I \).
+
+  Если \( f \) "--- приводим, то \( f = f_1 f_2 \),
+  \( 0 < \deg f_i < \deg f \To f_1, f_2 \notin I \).
+  Значит, \( (f_1) \supseteq I \) и \( R \ne (f_1) \ne I \To \)
+  \( I \) не максимален.
+  Наоборот, пусть \( f \) неприводим, \( J \NSG R \),
+  \( I \subseteq J \). Тогда \( J = (g) \),
+  \( g \in R \). Так как \( f \in J \),
+  \( g \divides f \), т. е. \( \deg g = 0 \)
+  или \( g = \alpha f \), \( \alpha \in F^* \).
+  В первом случае \( J = (g) = (1) = R \),
+  во втором "--- \( J = (g) = (f) = I \).
+  Итак, \( I \) максимален.
+\end{proof}
+\begin{corollary}
+  Если \( f \in F[x] \) неприводим,
+  то \( \Factor{F[x]}[(f)] \) "--- поле.
+\end{corollary}
+
+\section{Поле разложения многочлена}
+\begin{definition}
+  Пусть \( R \subseteq S \) "--- коммутативные кольца,
+  \( s \in S \). Тогда \( R[s] \) "--- подкольцо в \( s \),
+  порождённое \( R \) и \( s \), т. е.
+  пересечение всех подколец в \( S \), содержащих
+  \( R \) и \( s \); при этом,
+  \[
+    R[s] = 
+    \left\{
+      \sum_{i = 0}^n r_i s^i \mid r_i \in R
+    \right\}.
+  \]
+  Пусть \( F \subseteq K \) и \( F \) "--- поле, \( a \in K \).
+  Тогда \( F(a) \) "--- подполе в \( K \), порождённое
+  \( F \) и \( a \), т. е.
+  \( F(a) \) "--- это пересечение всех подполей \( K' \) в \( K \),
+  что \( F \subseteq F \), \( a \in K' \).
+  Если \( K = F(a) \), то \( K \) называется
+  \emph{расширением} поля \( F \) элементом \( a \).
+\end{definition}
+
+\begin{proposition}
+  Пусть \( F \) "--- поле, \( f \in F[x] \) "---
+  неприводимый многочлен.
+  Тогда существует расширение \( K = F(a) \),
+  где \( a \) "--- корень многочлена \( f \).
+  Более того, все такие расширения изоморфны, и
+  они изоморфны \( \Factor{F[x]}[(f)] \).
+  При этом, \( K = F(a) = F[a] \).
+\end{proposition}
+\begin{proof}
+  Положим \( K = \Factor{F[x]}[(f)] \) "--- поле.
+  Для любого \( b \in F \) отождествим \( b + (f) \)
+  с \( b \).
+  \begin{exercise}
+    Все элементы \( b + (f) \) различны.
+  \end{exercise}
+
+  Пусть \( a = x + (f) \). Тогда
+  \( f(a) = f(x) + (f) = (f) \To a \) "--- корень
+  многочлена \( f \) в \( K \).
+  Кроме того, разумеется, \( K = F[a] = F(a) \).
+  Итак, одно расширение построено, \( K = F[a] \).
+
+  Пусть \( L = F(c) \) "--- произвольное расширение 
+  поля \( F \) элементом таким, что \( f(c) = 0 \).
+  Построим гомоморфизм \( \phi : F[x] \to L \),
+  \( \phi(g) = g(c) \).
+  Тогда \( \Img \phi \cong \Factor{F[x]}[\Ker \phi] \),
+  при этом \( f \in \Ker \phi \To (f) \subseteq \Ker \phi \),
+  и \( (f) \) "--- максимален. Значит,
+  \( \Ker \phi = F[x] \) или \( \Ker \phi = (f) \).
+  Первый случай невозможен, ибо \( \phi(1) = 1 \ne 0 \),
+  т. е. \( 1 \notin \Ker \phi \).
+  Итак, \( \Ker \phi = (f) \To \Img \phi \cong
+  \Factor{F[x]}[(f)] = K \). Значит,
+  \( \Img \phi \) "--- подполе в \( L \), содержащее
+  \( F = \phi(F) \) и \( c = \phi(x) \). Значит,
+  \( \Img \phi \supseteq F(c) = L \To \Img \phi = L \cong K \)
+  (при этом изоморфизме элементу \( c \) соответствует
+  \( x + (f) \)).
+\end{proof}
+
+\begin{corollary}
+  Пусть \( f \in F[x] \), \( \deg f > 0 \).
+  Тогда существует поле \( K \supseteq F \)
+  такое, что многочлен \( f \) раскладывается
+  над \( K \) на линейные множители.
+\end{corollary}
+\begin{proof}
+  Индукция по \( \deg f \), база при \( \deg f = 1 \)
+  тривиальна: \( K = F \).
+  Пусть теперь \( \deg f > 1 \),
+  для многочленов меньших степеней это верно
+  и \( f_1 \) "--- неприводимый делитель многочлена
+  \( f \). Тогда существует расширение \( L = F[a] \),
+  где \( a \) "--- корень \( f_1 \).
+  Значит, над полем \( L \) многочлен \( f \) раскладывается
+  как \( f(x) = (x - a)g(x) \).
+  Осталось применить предположение индукции к полю
+  \( L \) и многочлену \( g(x) \).
+\end{proof}
+
+\begin{definition}
+  Пусть \( f \in F[x] \), \( \deg f > 0 \).
+  \emph{Полем разложения} многочлена \( f \)
+  над \( F \) называется поле \( K \supseteq F \)
+  такое, что
+  \begin{enumerate}
+    \item Над \( K \) \( f \) раскладывается на линейные множители.
+    \item \( K \) порождено корнями \( f \) и исходным полем.
+  \end{enumerate}
+\end{definition}
+
+\begin{exercise}
+  Поле разложения многочлена \( f \) существует и единственно
+  с точностью до изоморфизма.
+\end{exercise}
+\begin{exercise}
+  Пусть \( p \) "--- простое число, тогда
+  любое поле из \( p^n \) элементов есть
+  поле разложения \( x^p - x \) над \( \Integer_p \).
+  Кроме того, это поле разложения
+  действительно содержит ровно \( p^n \) элементов.
+\end{exercise}
+
+\end{document}

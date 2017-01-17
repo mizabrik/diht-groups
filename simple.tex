@@ -1,0 +1,238 @@
+\documentclass[main]{subfiles}
+
+\begin{document}
+
+\section{Простые группы}
+\begin{definition}
+  Группа $G$ называется \emph{простой}, если в ней ровно две нормальных
+  подгруппы: $G$ и $\{ e \}$.
+\end{definition}
+\begin{remark}
+  Группа из одного элемента не является простой.
+\end{remark}
+
+Пусть $G$ "--- произвольная группа,
+$G = G_0 \NGS G_1 \NGS \dots \NGS G_n = \{ e \}$ "---
+субнормальный ряд подгрупп ($G_i \ne G_{i + 1}$).
+Если $\Factor{G_i}[G_{i + 1}]$ "--- не простая,
+то существует нетривиальная
+$\Factor{H}[G_{i + 1}] \NSG \Factor{G_i}[G_{i + 1}]$,
+тогда $H$ можно вставить между $G_i$ и $G_{i + 1}$,
+ибо $G_i \NGS H \NGS G_{i + 1}$.
+Если эта процедура закончится
+(в частности, это так для всех конечных групп),
+то получим субнормальный
+ряд с простыми факторам.
+
+\begin{remark}
+  Полученный субнормальный ряд называется \emph{композиционным рядом}
+  группы $G$.
+\end{remark}
+
+Для любых двух композиционных рядов группы $G$ наборы факторов
+совпадают с точностью до перестановки и изоморфизма
+(теорема Жордана-Гёльдера).
+
+\begin{proposition}
+  Абелева группа проста $\oTTo G \cong \Integer_p$ при простом $p$.
+\end{proposition}
+\begin{proof}
+  Пусть $G$ "--- абелева простая группа, $e \ne g \in G$.
+  Тогда $\langle g \rangle \NSG G \To \langle g \rangle = G$.
+  Значит, $G \cong \Integer$ или $G \cong \Integer_n$.
+  Если $G \cong \Integer$, то $\Integer \NGS 2\Integer$ "--- $G$ не проста.
+  Пусть $G \cong \Integer_n$ и $n$ "--- составное, т. е. $n = kl$,
+  $k, l > 1$.
+  Тогда $\Integer_n \NGS k \Integer_n \ne \Integer_n
+  \To G$ непроста.
+
+  Если $G \cong \Integer_p$,
+  то $\Forall{H < G} |H| \divides p$,
+  т. е. $|H| = p$ или $|H| = 1$,
+  а значит $H = G$ или $H = \{ e \}$ "--- $G$ проста.
+\end{proof}
+
+\begin{theorem}
+  Группа $A_5$ проста.
+\end{theorem}
+\begin{lemma}
+  Пусть $H \NSG G$, $|G:H| = 2$, $h \in H$.
+  Тогда, если $C_G(h) \ne C_H(h)$, то $h^H = h^G$.
+  В противном случае $h^G = h^H \cup h_1^H$ и $|h^H|
+  = |h_1^H|$ для некоторого $h_1 \in H^G$.
+\end{lemma}
+\begin{proof}
+  Напоминание: $C_G(h) = \{ g \in G \mid hg = gh \}$,
+  $|h^G| = |G : C_G(h)|$.
+
+  Пусть существует $g \in C_G(h) \setminus C_H(h) = C_G(h) \setminus H$.
+  Тогда $G = H \cup gH = H \cup Hg$. Значит, $h^G = h^H \cup h^{gH} =
+  h^H \cup (h^g)^H = h^H$, т. к. $g \in C_G(h)$.
+
+  Пусть $h^G = h^H$. Тогда $\Forall{g \in G \setminus H}
+  h^g = h^x$, $x \in H \To h^{gx^{-1}} = h \To gx^{-1} \in C_G(h) \setminus H$.
+  В этом случае $C_G(h) \ne C_H(h)$.
+  Значит, если $C_G(h) = C_H(h)$, то $h^G \ne h^H$, но $h^G =
+  h^H \cup (h^g)^H$, где $g \in G \setminus H$. Обозначим
+  $h_1 = h^g \To h^G = h^G \sqcup h_1^H$. Наконец,
+  $h_1^H = h^{gH} = h^{Hg}$, тогда биекция между
+  $h^H$ и $h_1^H$ задаётся очень просто: $h^H \ni x \mapsto x^g \in h^{Hg}$.
+  Итак, $|h^H| = |h_1^H|$.
+\end{proof}
+\begin{proof}[Доказательство теоремы]
+  Пусть $H \NSG A_5$, $H \ne \{ e \}$.
+  Тогда $H$ есть объединение нескольких
+  классов сопряжённости в $A_5$.
+  Пусть $\sigma = \Cycle{a_1 & \dots & a_k} \in S_n$.
+  Тогда $\sigma^{\tau^{-1}} = \tau \sigma \tau^{-1} =
+  \Cycle{\tau(a_1) & \dots & \tau(a_k)}$.
+  
+  Значит, классы сопряжённости 
+  (и их мощности)
+  элементов $A_5$ в $S_5$
+  и в \( A_5 \) таковы:
+
+  \begin{center}
+    \begin{tabularx}{0.82\textwidth}{|l|X|}
+      \hline
+      в $S_5$ & в $A_5$ \\
+      \hline
+      \hline
+      $e^{S_5} = \{ e \}$  & \(|\{ e \}| = 1\) \\
+      \hline
+      $\Cycle{1&2&3}^{S_5} = \{ \Cycle{i&j&k} \}
+       $ & $\Cycle{4&5} \in C_{S_5}(\Cycle{1&2&3}) \setminus A_5$,
+
+      то есть
+      $|\Cycle{1&2&3}^{A_5}| = |\{ \Cycle{i&j&k} \}| = 20$ \\
+      \hline
+      $(\Cycle{1&2}\Cycle{3&4})^{S_5} =
+      \{ \Cycle{i&j}\Cycle{k&l} \}$ &
+      $\Cycle{3&4} \in C_{S_5}
+      (\Cycle{1&2}\Cycle{3&4}) \setminus
+      A_5$,
+
+      то есть
+      $|(\Cycle{1&2}\Cycle{3&4})^{A_5}| =
+      |\{ \Cycle{i&j}\Cycle{k&l} \}| = 15$ \\
+      \hline
+      $\Cycle{1&2&3&4&5}^{S_5} = \{ \Cycle{i&j&k&l&m}
+      \}$  &
+      \( 24 \ndivides |A_5| = 60 \To \) 
+      два класса:
+
+      $|\Cycle{1&2&3&4&5}^{A_5}| = 12$, $|\Cycle{1&2&3&5&4}^{A_5}| = 12$ \\
+      \hline
+    \end{tabularx}
+  \end{center}
+
+  Из тех чисел $1, 20, 15, 12, 12$ нельзя составить нетривиальную сумму,
+  делящую $|A_5| = 60$ и содержащую $1$.
+  Значит, раз $|H| \divides 60$
+  и $e \in H$,
+  $|H| = 60$ и $H = A_5$.
+\end{proof}
+
+\begin{theorem}
+  При $n \ge 5$ группа $A_n$ проста.
+\end{theorem}
+\begin{remark}
+  $A_4 \NGS V_4$.
+\end{remark}
+
+\begin{proof}
+  Уже знаем: \( A_n = \GenGroup{ \{ \Cycle{i & j & k} \} } \),
+  \( A_n \) действует на \( \{ 1, \dots, n \} \)
+  и \( \St(i) \cong A_{n - 1} \).
+
+  Индукция по $n \ge 5$, база уже доказана.
+  Пусть теперь $n \ge 6$, $\{ e \} \ne H \NSG A_n$.
+
+  Докажем, что существует нетривиальная
+  перестановка \( e \ne \sigma \in H \) такая,
+  что \( \Exists{i} \sigma \in \St(i) \).
+  Рассмотрим $e \ne \tau \in H$. Б. о. о.
+  $\tau = \Cycle{1 & 2 & \dots}\dots$ "--- разложение $\tau$ в произведение
+  независимых циклов. $\tau \in A_n \To \tau$ нетривиально переставляет
+  хотя бы $3$ элемента.
+  Значит, $\Exists{k} \tau(k) \notin \{ 1, 2, k \}$
+  (возможно, $k \in \{ 1 ,2 \}$).
+  Пусть $\tau(k) = l$. Наконец,
+  пусть $p, q \notin \{ 1, 2, k, l \}$, $p \ne q$, $p, q \in \{1, \dots, n \}$.
+  Обозначим $\tau_1 = \tau^{(l,p,q)}$,
+  тогда $\tau_1(1) = 2$, $\tau_1(k) = q$.
+  Значит,
+  $(\tau_1 \tau^{-1})(2) = 2$,
+  $(\tau_1 \tau^{-1})(l) = q \ne l$,
+  т. е.  $e \ne \tau_1 \tau^{-1} \in H \cap \St(2)$.
+
+  Пусть $e \ne \sigma \in H \cap \St(n)$. Тогда $H \cap \St(n)
+  \NSG \St(n) \cong A_{n - 1}$. Значит,
+  $H \cap \St(n) = \St(n)$ по предположению индукции.
+  В частности, $\Cycle{1&2&3} \in H \To \Cycle{1&2&3}^{A_n} \subseteq H$,
+  но $\Cycle{1&2&3}^{A_n} = \{ \Cycle{i&j&k} \}$. Т. о. $H > \langle
+  \Cycle{1&2&3}^{A_n} \rangle = A_n$.
+\end{proof}
+
+\begin{remark}
+  $A_5$ "--- неабелева простая группа наименьшего возможного порядка.
+\end{remark}
+
+\begin{remark}
+  Пусть $F$ "--- поле.
+  Тогда простой является группа
+  \[
+    PSL_N(F) = \Factor{SL_n(F)}[\Centre{SL_N(F)}],
+  \]
+  где $\Centre{SL_n(F)} =
+  \{ \lambda E \mid \lambda \in F, \lambda^n = 1 \}$,
+  если
+  \begin{enumerate}\renewcommand{\labelenumi}{\asbuk{enumi})}
+    \item $n \ge 3$ 
+    \item $n = 2$ и $|F| \ge 4$.
+  \end{enumerate}
+\end{remark}
+
+\begin{exercise}
+  $PSL_2(F_2) \cong S_3$,
+  $PSL_2(F_3) \cong A_4$,
+  %"<Со звёздочкой">:
+  $PSL_2(F_4) \cong PSL_2(F_5) \cong A_5$.
+\end{exercise}
+
+\begin{theorem}
+  Группа $SO_3$ проста, где $SO_3 = O_3 \cap SL_3(\Real)$.
+\end{theorem}
+\begin{remark}
+  $SO_3$ "--- группа \emph{вращений} трёхмерного евклидового
+  пространства. Действительно, если $A \in SO_3$, то у $A$
+  есть с. з. $1$ и $A$ реализует вращение вокруг соответствующего
+  собственного вектора.
+\end{remark}
+\begin{proof}
+  Как выглядят классы сопряжённости в $SO_3$? Пусть
+  $g, h \in SO_3$, и пусть $h$ "--- вращение вокруг $l$
+  на угол $\alpha$.
+  Тогда $g h g^{-1}$ "--- вращение на угол $\alpha$ вокруг $g(l)$,
+  поскольку $h(x) = y \To ghg^{-1}(gx) = g(y)$.
+  Значит, $h^{SO_3}$ состоит из всех вращений на угол $\alpha$.
+  Пусть $\{ e \} \ne H \NSG SO_3$. Пусть $e \ne h \in H$ --
+  пусть это вращение на $\alpha$ относительно $l$. Тогда в $H$ содержатся
+  все вращения на $\alpha$. Пусть $l(\phi)$ "--- прямая, образующая
+  угол $\phi$ с $l$, $x(\phi)$ "--- вращение вокруг $l(\phi)$ на $\alpha$.
+  Тогда $x(\phi) \in H$ (считаем, что $x(\phi)$ непрерывно меняется
+  при изменении $\phi$). Положим $y(\phi) = h(x(\phi))^{-1}$. Тогда
+  $y(0) = id$, а $y(\phi)$ "--- вращение на некоторый угол $\beta(\phi)$,
+  $\beta(0) = 0$. $\beta(\phi)$ "--- также непрерывная функция
+  аргумента $\phi$ ($\beta$ выражается через $\tr y(\phi)$),
+  $\beta$ "--- не тождественный ноль. Значит, значения
+  $\beta(\phi)$ заметают некоторый интервал
+  $[0, \alpha_0]$, $\alpha_0 > 0$, т. к. $y(\phi) \in H$,
+  в $H$ лежат все вращения на углы $\gamma \in [0, \alpha_0]$
+  $\To$ в $H$ лежат все вращения 
+\end{proof}
+
+\begin{remark}
+  $SO_n$ проста при $n = 3$ и $n \ge 5$.
+\end{remark}
+\end{document}

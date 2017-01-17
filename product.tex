@@ -1,0 +1,179 @@
+\documentclass[main]{subfiles}
+
+\begin{document}
+
+\section{Прямое произведение групп}
+\begin{definition}
+  Пусть \( G_1, G_2 \) "--- группы.
+  Их (внешним) \emph{прямым произведением}
+  называется множество \( G = G_1 \times G_2 =
+  \{ (g_1, g_2) \mid g_1 \in G_1, g_2 \in G_2 \} \)
+  с операцией \( (g_1, g_2) \cdot (g_1', g_2') =
+  (g_1 g_1', g_2 g_2') \).
+\end{definition}
+
+\begin{proposition}
+  Если \( G_1 \), \( G_2 \) "--- группы,
+  то \( G_1 \times G_2 \) "--- группа.
+\end{proposition}
+\begin{proof}
+  Ассоциативность следует из ассоциативности \( G_1 \)
+  и \( G_2 \), нейтральным будет \( (e_1, e_2) \) а
+  обратным к \( (g_1, g_2) \) "--- \( (g_1^{-1}, g_2^{-1}) \).
+\end{proof}
+
+\begin{proposition}
+  Для групп \( G_1 \), \( G_2 \), \( G_3 \) верно:
+  \begin{enumerate}
+    \item \( G_1 \cong G_1 \times \{ e \} \NSG G_1 \times G_2 \)
+    \item \( G_1 \times G_2 \cong G_2 \times G_1 \)
+    \item \( (G_1 \times G_2) \times G_3 \cong
+      G_1 \times (G_2 \times G_3) \)
+  \end{enumerate}
+\end{proposition}
+\begin{proof}~
+  \begin{enumerate}
+    \item Очевидно, \( G_1 \times \{ e \} < G_1 \times G_2 \).
+      При этом,
+      \[
+	(g_1', g_2')^{-1} (g_1, e) (g_1', g_2') =
+	(g_1'^{-1} g_1 g_1', e) \in G_1 \times \{ e \}
+	\To
+	G_1 \times \{ e \} \NSG G_1 \times G_2.
+      \]
+      Изоморфизм же осуществляется отображением
+      \( \phi : g \mapsto (g, e) \).
+    \item Изоморфизм осуществляется отображением
+      \( (g_1, g_2) \mapsto (g_2, g_1) \).
+    \item Изоморфизм "---
+      \( ((g_1, g_2), g_3) \mapsto (g_1, (g_2, g_3)) \).
+      \qedhere
+  \end{enumerate}
+\end{proof}
+
+\begin{remark}
+  Таким образом можно определить
+  \( G_1 \times \dots \times G_k \).
+  Более того, аналогично можно определить
+  и  прямое произведение бесконечного
+  числа групп: \( \prod_{\alpha \in I} G_\alpha \),
+  где \( I \) "--- произвольное множество индексов.
+\end{remark}
+
+% --- 2016-10-06 ---
+\begin{theorem}
+  Пусть \( A, B \NSG G \), \( AB = G \),
+  \( A \cap B = \{ e \} \).
+  Тогда \( G \cong A \times B \).
+\end{theorem}
+\begin{proof}
+  Покажем, что \( \Forall{a \in A, b \in B} ab = ba \).
+  Действительно, рассмотрим
+  \( a b a^{-1} b^{-1} \):
+  \( a b a^{-1} \in B \) и \( b a^{-1} b^{-1} \in A \)
+  из их нормальности,
+  а тогда \( a b a^{-1} b^{-1} \in A \cap B = \{ e \} \),
+  т. е. \( ab a^{-1} b^{-1} = e \To
+  ab = ba \).
+
+  Построим отображение
+  \( \phi : A \times B \to G \):
+  \( \phi : (a, b) \mapsto a b \).
+  Тогда \( \phi((a_1, b_1) \cdot (a_2, b_2)) =
+  \phi((a_1 a_2, b_1 b_2)) = a_1 a_2 b_1 b_2 =
+  a_1 b_1 a_2 b_2 = \phi((a_1, b_1)) \cdot \phi((a_2, b_2)) \To \)
+  \( \phi \) "--- гомоморфизм.
+  Т. к. \( AB = G \), \( \Img \phi = AB = G \).
+  Наконец, если \( (a, b) \in \Ker \phi \),
+  то \( ab = e \To a = b^{-1} \in A \cap B = \{ e \}
+  \To a = b = e \To \Ker \phi = \{ (e, e) \} \).
+  Значит, \( \phi \) "--- изоморфизм.
+\end{proof}
+
+\begin{definition}
+  В ситуации, описанной в теореме,
+  \( G \) является
+  \emph{внутренним прямым произведением}
+  \( A \) и \( B \).
+\end{definition}
+
+\begin{remark}
+  \( \Factor{G}[A] = \Factor{AB}[A] \cong
+  \Factor{B}[B \cap A] = \Factor{B}[\{ e \}] \cong B \)
+  по первой теореме об изоморфизме.
+  Аналогично, \( \Factor{G}[B] = A \).
+\end{remark}
+
+\begin{proposition}
+  Пусть \( G = A \times B \) "--- прямое произведение
+  групп \( A \) и \( B \).
+  Пусть \( A_1 \NSG A \), \( B_1 \NSG B \).
+  Тогда \( A_1 \times B_1 \NSG A \times B \),
+  причём \( \Factor{(A \times B)}[(A_1 \times B_1)] =
+  (\Factor{A}[A_1]) \times (\Factor{B}[B_1]) \).
+\end{proposition}
+\begin{proof}
+  Пусть \( \overline{A} = \Factor{A}[A_1] \),
+  \( \overline{B} = \Factor{B}[B_1] \), и
+  пусть \( \pi_A : A \to \overline{A} \),
+  \( \pi_B : B \to \overline{B} \) "---
+  соответствующие канонические эпиморфизмы.
+  Рассмотрим \( \pi = \pi_A \times \pi_B :
+  A \times B \to \overline{A} \times \overline{B} \),
+  \( \pi(a, b) = (\pi_A(a), \pi_B(b)) \).
+  Нетрудно видеть, что \( \pi \) "---
+  эпиморфизм групп.
+  \( \Ker \pi = \Ker \pi_A \times \Ker \pi_B =
+  A_1 \times B_1 \).
+  Итак, \( \overline{A} \times \overline{B} =
+  \Img \pi \cong \Factor{(A \times B)}[\Ker \pi] =
+  \Factor{(A \times B)}[(A_1 \times B_1)] \)
+  (и \( A_1 \times B_1 = \Ker \pi \NSG G \)).
+\end{proof}
+
+В заключение, рассмотрим более общую ситуацию.
+Пусть \( A \NSG G \), \( B < G \),
+причём \( AB = G \), \( A \cap B = \{ e \} \).
+В этом случае, \( G \) называется
+полупрямым произведением \( A \) и \( B \):
+\( G = A \leftthreetimes B \).
+
+\begin{examples}~
+  \begin{enumerate}
+    \item \( S_n = A_n \leftthreetimes
+      \langle (1, 2) \rangle \), \( n \ge 2 \).
+      (но \( S_n \ncong A_n \times \langle (1, 2) \rangle \)
+      при \( n \ge 3 \), ибо \(
+      Z(S_n) = \{ e \} \)).
+    \item \( S_4 = V_4 \leftthreetimes S_3 \).
+  \end{enumerate}
+\end{examples}
+
+Как описать полупрямые произведения групп?
+Пусть \( G = A \leftthreetimes B \),
+\( \Forall{b \in B} b A b^{-1} = A \).
+Значит, группа \( B \) действует сопряжением
+на \( A \), т. е. возникает гомоморфизм
+\( \psi : B \to \Aut A \):
+\( [\psi(b)](a) = b a b^{-1} = a^{b^{-1}} \).
+Задание групп \( A \), \( B \) и гомоморфизма
+\( \psi \) однозначно задаёт \( G \).
+Действительно, для любого \( g \in G \)
+существует единственное разложение
+\( g = ab \), \( a \in A \), \( b \in B \).
+Умножение задаётся так:
+\[
+  (a_1, b_1)(a_2, b_2) =
+  a_1 b_1 a_2 b_2 = a_1 (b_1 a_2 b_1^{-1}) b_1 b_2 =
+  \underbrace{a_1}_{\in A} \underbrace{[\psi(b_1)](a_2)}_{\in A}
+  \underbrace{b_1 b_2}_{\in B}
+\]
+
+\begin{exercise}
+  Пусть \( A \), \( B \) "--- группы,
+  \( \psi : B \to \Aut A \) "--- гомоморфизм.
+  Тогда можно определить группу так: \( G = A \times B \),
+  \( (a_1, b_1)(a_2, b_2) = (a_1 \cdot [\psi(b_1)](a_2), b_1 b_2) \).
+\end{exercise}
+
+\end{document}

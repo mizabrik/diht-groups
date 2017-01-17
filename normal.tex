@@ -1,0 +1,77 @@
+\documentclass[main]{subfiles}
+
+\begin{document}
+\section{Нормальные подгруппы}
+\begin{definition}
+  Пусть $H < G$. $H$ называется \emph{нормальной подгруппой} в $G$
+  ($H \NSG G$),
+  если $\Forall{g \in G} gH = Hg$.
+\end{definition}
+\begin{remark}
+  Эквивалентно: $H = g^{-1} H g$.
+\end{remark}
+
+\begin{examples}~
+  \begin{enumerate}
+    \item $G \NSG G$.
+    \item $\{ e \} \NSG G$.
+    \item Если $G$ --- абелева, то все подгруппы нормальны.
+    \item $A_n \NSG S_n$. Действительно, если $\sigma \in A_n$,
+      то $\sigma A_n = A_n = A_n \sigma$. Иначе, $\sigma A_n =
+      S_n \setminus A_n = A_n \sigma$.
+    \item $\langle \Cycle{1 & 2} \rangle \not \NSG S_3$.
+      $\langle \Cycle{1&2} \rangle = \{ \id, \Cycle{1 & 2} \}$.
+      $\Cycle{1&3}\langle \Cycle{1&2} \rangle = \{ \Cycle{1&3}, \Cycle{1&2&3} \}$,
+      но $\langle \Cycle{1&2} \rangle \Cycle{1&3} = \{ \Cycle{1&3}, \Cycle{1&3&2} \}$.
+  \end{enumerate}
+\end{examples}
+
+\begin{proposition}
+  Пусть $H < G$, $|G:H| = 2$. Тогда $H \NSG G$.
+\end{proposition}
+\begin{proof}
+  $G$ разбивается на левые смежные классы по $H$, один из них --- $H = eH$,
+  а значит другой --- $G \setminus H$. Аналогично, правые смежные классы --- $H$
+  и $G \setminus H$. Значит, если $g \in H$, то $gH = Hg = H$. Если же $g \in G\setminus H$,
+  то $gH = G \setminus H = Hg$.
+\end{proof}
+
+\begin{proposition}
+  Пусть $H_1, H_2 \NSG G$. Тогда $H_1 \cap H_2 \NSG G$.
+\end{proposition}
+\begin{proof}
+  $H_1 \cap H_2 < G$ --- тривиально.
+  Проверим, что для произвольного \( g \in G \)
+  верно $g^{-1}(H_1\cap H_2)g= H_1 \cap H_2$.
+  $\Forall{h \in H_1 \cap H_2} g^{-1}hg \in H_1 \wedge g^{-1}hg \in H_2 \To
+  g^{-1}hg \in H_1 \cap H_2$. Мы показали, что $\Forall{g \in G} g^{-1}(H_1 \cap H_2)g \subseteq
+  H_1 \cap H_2$. Этого достаточно:
+  $g (H_1 \cap H_2) g^{-1} \subseteq H_1 \cap H_2 \To
+  H_1 \cap H_2 = g^{-1}g(H_1 \cap H_2) g^{-1} g \subseteq
+  g^{-1} (H_1 \cap H_2) g$.
+\end{proof}
+
+\begin{remark}
+  Если $H < G$ и $\Forall{g \in G} g^{-1} H g \subseteq H$,
+  то $\Forall{g \in G} g^{-1}Hg = H$.
+\end{remark}
+
+\begin{proposition}
+  Пусть $H \NSG G$, $K < G$.
+  Тогда $HK = \{ hk : h \in H, k \in K \} < G$.
+  Если $K \NSG G$, то и $HK \NSG G$.
+\end{proposition}
+\begin{proof}
+  Покажем, что $HK = KH$.
+  Действительно,
+  $HK = \bigcup_{k \in K} Hk =
+  \bigcup_{k \in K} kH = KH$.
+  Теперь покажем, что $HK < G$:
+  $(HK)(HK) = H(KH)K = HH KK = HK$;
+  $(HK)^{-1} = K^{-1}H^{-1} = KH = HK$.
+
+  Если же $K \NSG G$,
+  то $\Forall{g \in G}
+  gHK = HgK = HKg \To HK \NSG G$.
+\end{proof}
+\end{document}

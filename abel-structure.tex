@@ -1,0 +1,448 @@
+\documentclass[main]{subfiles}
+
+\begin{document}
+
+% 2016-11-17
+Во время работы с абелевыми группами
+мы считаем, что операция "--- это "<\( + \)">,
+а вместо \( a^n \) пишем \( na \).
+
+Мы уже встречали следующие абелевы группы:
+\begin{enumerate}
+  \item Циклические: \( \Integer \) или \( \Integer_n \)
+    (и изоморфные им).
+  \item \( \Integer^l 
+    \times \Integer_{n_1} \times \dots \times \Integer_{n_k} \) "---
+    также конечно порождена
+    (она порождена \( k + l \) элементами вида
+    \( (0, \dots, 0, 1, 0, \dots, 0 ) \)).
+\end{enumerate}
+
+Наша цель "--- доказать, что все конечно порождённые абелевы
+группы изоморфны таким.
+
+\begin{remark}
+  Если \( \GCD(n, k) = 1 \),
+  то \( \Integer_n \times \Integer_k \cong \Integer_{nk} \).
+  Действительно, элемент \( (1, 1) \in \Integer_n \times \Integer_k \)
+  имеет порядок \( nk \To \Integer_n \times \Integer_k =
+  \langle (1, 1) \rangle \cong \Integer_{nk} \).
+  Значит, наше представление не единственно.
+\end{remark}
+\begin{remark}
+  Условие конечно порождённости существенно.
+  Например, группа \( (\Rational, +) \)
+  не представима в выписанном виде.
+  Более того, она неразложима в нетривиальное
+  прямое произведение, т. к. в ней нет двух
+  нетривиальных подгрупп, пересекающихся по
+  \( \{ 0 \} \).
+\end{remark}
+
+\section{Конечно порождённые абелевы группы без кручения}
+
+\begin{definition}
+  Пусть \( A \) "--- абелева группа.
+  Её \emph{периодической частью} (или \emph{кручением})
+  называется
+  \[
+    T(A) = \{ a \in A \mid \ord a < \infty \}.
+  \]
+  Группа \( A \) называется \emph{абелевой группой без кручения},
+  если \( T(A) =  \{ 0 \} \).
+\end{definition}
+
+\begin{proposition}
+  Если \( A \) "--- абелева группа, то \( T(A) < A \).
+\end{proposition}
+\begin{proof}
+  \( 0 \in T(A) \To T(A) \ne \emptyset \).
+  Если \( a, b \in T(A) \), то \( \Exists{n, k \in \Natural}
+  na = kb = 0 \).
+  Тогда \( n \cdot (-a) = -na = 0 \To -a \in T(A) \) и
+  \( nk (a + b) = nka + nkb = k \cdot 0 + n \cdot 0 = 0
+  \To a + b \in T(A) \).
+  Значит, \( T(A) < A \).
+\end{proof}
+\begin{remark}
+  Периодическая часть неабелевой группы не обязательно подгруппа.
+  Скажем, в \( O_2 \) все осевые симметрии имеют порядок 2,
+  но их произведение может быть поворотом бесконечного порядка.
+\end{remark}
+
+Пусть \( A \) "--- конечно порождённая абелева группа без кручения.
+
+\begin{definition}
+  Пусть \( a_1, \dots, a_n \in A \).
+  Система элементов \( a_1, \dots, a_n \) называется
+  \emph{независимой}, если
+  \[
+    \Forall{k_1, \dots, k_n \in \Integer}
+    \sum_{i = 1}^n k_i a_i = 0 \To k_1 = \dots = k_n = 0.
+  \]
+  Эта система называется \emph{базисом} группы \( A \),
+  если она независима
+  и \( \langle a_1, \dots, a_n \rangle = A \).
+\end{definition}
+\begin{remark}
+  Если \( a_1, \dots, a_n \) "--- базис в \( A \),
+  то
+  \( \Forall{b \in A}
+  \ExistsOne{k_1, \dots, k_n \in \Integer}
+  b = \sum_{i = 1}^n k_i a_i
+  \)
+\end{remark}
+
+\begin{lemma}
+  Пусть \( A = \langle a_1, \dots, a_n \rangle \),
+  и \( b_1, \dots, b_k \in A \), \( k > n \).
+  Тогда система \( b_1, \dots, b_k \) "--- зависима.
+\end{lemma}
+\begin{proof}
+  Поскольку \( b_i \in \langle a_1, \dots, a_n \rangle \),
+  \( (b_1, \dots, b_k) = ( a_1, \dots, a_n) S \),
+  где \( S \in \Matrices{n}{k}[\Integer] \subseteq
+  \Matrices{n}{k}[\Rational] \).
+  Так как \( k > n \), столбцы \( S \) линейно зависимы
+  над \( Q \), т. е.
+  существует \( 0 \ne x' \in \Matrices{k}{1}[\Rational] \)
+  такой, что \( S x' = 0 \).
+  Домножив \( x' \) на произведение знаменателей элементов
+  из \( x' \), получим \( x \in \Matrices{k}{1}[\Integer] \).
+  Значит, \( (b_1, \dots, b_k) x = (a_1, \dots, a_n)Sx = 0 \).
+  Т. к. \( x \ne 0 \), \( (b_1, \dots, b_k) \) "--- зависимы.
+\end{proof}
+
+\begin{theorem}
+  Пусть \( A \) "--- конечно порождённая абелева группа без кручения,
+  тогда в \( A \) есть базис.
+  Более того, любые два базиса в \( A \) равномощны.
+\end{theorem}
+\begin{proof}
+  Предположим противное.
+  Тогда любая порождающая группу система зависима.
+  Из всех конечных порождающих систем выберем
+  систему из наименьшего числа элементов
+  \( a_1, \dots, a_n \).
+  Пусть \( s_1, \dots, s_n \) "--- коэффициенты зависимости:
+  \( \sum_{i = 1}^n s_i a_i = 0 \), не все \( s_i \) "--- нули.
+  Из всех таких систем \( a_1, \dots, a_n, s_1, \dots, s_n \)
+  выберем такую, в которой \( 0 \ne |s_1| \) минимален.
+
+  \begin{enumerate}
+    \item Можно считать, что \( s_1 > 0 \)
+      (иначе домножим \( s_i \) на \( -1 \)).
+    \item Если \( s_1 = 1 \), то
+      \( a_1 + \sum_{i = 2}^n s_i a_i = 0 \To
+      a_1 = -\sum_{i = 2}^n s_i a_i \To
+      A = \langle a_2, \dots, a_n \rangle \),
+      противоречие.
+    \item \( s_1 > 1 \). Пусть \( s_1 \ndivides s_i \)
+      при некотором \( i \ge 2 \).
+      Тогда \( s_i = q s_1 + r \), \( q \in \Integer \),
+      \( r \in \Natural \)
+      и \( 0 < r < s_1 \).
+      Значит, \( 0 = \sum_{j = 1}^n s_j a_j =
+      s_1 a_1 + (q s_1 + r) a_i +
+      \sum_{2 \le j \le n, j \ne i} s_j a_j =
+      s_1(a_1 + q a_i) + r a_i  +
+      \sum_{2 \le j \le n, j \ne i} s_j a_j \).
+      Заметим, что \( A = \langle a_1 + q a_i, a_2, \dots, a_n \rangle \),
+      т. к. \( a_1 = (a_1 + q a_i) - q a_i \).
+      Для новой системы порождающих есть зависимость,
+      в которой встречается коэффициент \( 0 \ne |r| < |s_1| \) "---
+      противоречие с выбором системы.
+    \item Итак, \( s_1 > 1 \), \( s_1 \divides s_i \).
+      Тогда \( 0 = \sum_{i = 1}^n s_i a_i =
+      s_1 (\sum_{i = 1}^n \frac{s_i}{s_1} a_i) \To
+      \sum_{i = 1}^n \frac{s_i}{s_1} a_i \in T(A) \To
+      \sum_{i = 1}^n \frac{s_i}{s_1} a_i = 0 \To
+      a_1 = -\sum_{i = 2}^n \frac{s_i}{s_1} a_i \).
+      Противоречие.
+  \end{enumerate}
+
+  Осталось показать, что любые два базиса равномощны.
+  Пусть \( (a_1, \dots, a_n) \) и \( (b_1, \dots, b_k) \)
+  базисы в \( A \). Тогда каждая из этих систем
+  порождает \( A \) и, по лемме,
+  \( k \le n \le k \To k = n \).
+\end{proof}
+
+\begin{remark}
+  Пусть \( a_1, \dots, a_n \) и \( b_1, \dots, b_n \) "---
+  два базиса в \( A \).
+  Тогда \( (a_1, \dots, a_n) = (b_1, \dots, b_n) S \)
+  и \( (b_1, \dots, b_n) = (a_1, \dots, a_n) T \),
+  \( S, T \in \Matrices{n}{n}[\Integer] \).
+  Значит, \( (a_1, \dots, a_n) = (a_1, \dots, a_n)TS \).
+  Т. к. выражение через базис единственно, \( TS = E
+  \To \det T \cdot \det S = 1 \), а поскольку
+  их определители также целочисленны,
+  \( \det S = \det T = \pm 1 \).
+  Наоборот, если \( a_1, \dots, a_n \) "--- базис,
+  \( S \in \Matrices{n}{n}[\Integer] \), \( \det S = \pm 1 \),
+  то \( (a_1, \dots, a_n) S \) "--- тоже базис, т. к.
+  \( S^{-1} \in \Matrices{n}{n}[\Integer] \) по формуле Крамера.
+\end{remark}
+
+\begin{remark}
+  В условиях нашей теоремы
+  если \( a_1, \dots, a_n \) "--- базис в \( A \),
+  то
+  \[
+    A = \langle a_1, \dots, a_n \rangle =
+    \langle a_1 \rangle \times \dots \times \langle a_n \rangle \cong
+    \Integer \times \dots \times \Integer = \Integer^n
+  \]
+\end{remark}
+
+% "--- 2016-11-24 "---
+
+\begin{definition}
+  Пусть \( A = \langle a_1, \dots, a_k \rangle \) "--- абелева группа.
+  \( A \) называется \emph{свободной абелевой группой} со свободными
+  порождающими \( a_1, \dots, a_k \), если для любой абелевой
+  группы \( B \) и элементов \( b_1, \dots, b_k \in B \)
+  существует гомоморфизм \( \phi : A \to B \) такой, что
+  \( \phi(a_i) = b_i \), \( i = 1, \dots, k \).
+\end{definition}
+
+\begin{remark}
+  Две свободные абелевы группы с одним и тем же количеством порождающих
+  изоморфны "--- аналогично обычным.
+\end{remark}
+\begin{remark}
+  В качестве свободной абелевой группы с \( k \) порождающими можно взять
+  \[
+    A = \GenGroup{a_1, \dots, a_k}[[a_i, a_j] = e, 1 \le i < j \le k] =
+    \Factor{F_k}[\GenNGroup{[f_i,f_j] \mid 1 \le i < j \le k}] =
+    \Factor{F_k}[F_k']
+  \]
+\end{remark}
+
+\begin{theorem}
+  Свободная абелева группа с \( k \) свободными порождающими "--- это
+  \( \Integer^k \) (с точностью до изоморфизма).
+\end{theorem}
+\begin{proof}
+  Пусть \( A = \Integer^k \), положим
+  \( a_i = ( 0, \dots, 0, 1, 0, \dots, 0) \).
+  Тогда \( A = \langle a_1, \dots, a_k \rangle \),
+  т.~к.~\( (x_1, \dots, x_k) = \sum_{i=1}^k x_i a_i \).
+  Кроме того, для любой абелевой группы \( B \) и
+  для любых \( b_1, \dots, b_k \in B \) можно определить
+  \( \phi((x_1, \dots, x_k)) = \sum_{i = 1}^k x_i b_i \).
+  Тогда \( \phi : A \to B \) "--- гомоморфизм, и
+  \( \phi(a_i) = b_i \).
+\end{proof}
+
+\section{Строение конечно порождённых абелевых групп}
+\begin{corollary}
+  Пусть \( A = \GenGroup{a_1, \dots, a_k} \) "---
+  конечно порождённая абелева группа.
+  Тогда существует \( B \NSG \Integer^k \)
+  такая, что \( A \cong \Factor{\Integer^k}[B] \).
+\end{corollary}
+\begin{proof}
+  Пусть \( c_1, \dots, c_k \) "--- свободные порождающие группы
+  \( \Integer_k \). Тогда существует гомоморфизм
+  \( \phi : \Integer^k \to A \) такой, что \( \phi(c_i) = a_i \).
+  Значит, \( \Img \phi = \langle \phi(c_1), \dots, \phi(c_k) \rangle = A \).
+  Если \( B = \Ker \phi \), то \( A \cong \Factor{\Integer^k}[B] \) по
+  основной теореме о гомоморфизмах.
+\end{proof}
+
+Итак, для описания конечно порождённых абелевых групп
+полезно исследовать подгруппы в \( \Integer^k \).
+
+\begin{theorem}
+  Пусть \( A \) "--- свободная абелева группа, \( B < A \).
+  Тогда \( B \) "--- также свободная абелева группа;
+  причём в \( A \) и \( B \) существуют базисы
+  \( a_1, \dots, a_k \) и \( b_1, \dots, b_l \) такие, что
+  \( k \ge l \), \( b_i = m_i a_i \), \( m_i \in \Natural \),
+  и \( m_1 \divides m_2 \divides \dots \divides m_l \).
+\end{theorem}
+\begin{proof}
+  Пусть \( A \cong \Integer^k \). Индукция по \( k \).
+
+  \paragraph{База} Если \( k = 1 \), то \( A \cong \Integer \), а
+  \( B \cong n \Integer \), \( n \in \Integer_+ \).
+  Тогда можно положить \( a_1 = 1 \) и
+  \( b_1 = n \) (если \( n > 0 \)) или \( l = 0 \)
+  (если \( n = 0 \)).
+
+  \paragraph{Переход} Пусть \( k > 1 \). Если \( B = 0 \),
+  то утверждение верно (при \( l = 0 \)). Пусть теперь
+  \( B \ne 0 \). Для любого базиса \( a_1, \dots, a_n \) в \( A \)
+  и для любого \( b \in B \setminus \{ 0 \} \) существуют целые
+  \( n_i \) такие, что \( b = \sum_{i = 1}^k n_i a_i \).
+  Выберем базис \( (a_1, \dots, a_k) \) в \( A \) и
+  \( 0 \ne b_1 \in B \) так, что \( n_1 > 0 \) и \( n_1 \) "---
+  наименьшее возможное.
+
+  \begin{enumerate}
+    \item Пусть \( n_1 \ndivides n_i \) при некотором \( i \ge 2 \).
+      Тогда \( n_i = qn_1 + r \), \( q \in \Integer \),
+      \( 0 < r \le n_1 - 1 \). Тогда
+      \[
+	b_1 = n_1 a_1 + n_i a_i + \sum_{j \ge 2, j \ne i} n_j a_j =
+	n_1(a_1 + q a_i) + r a_i + \sum_{j \ge 2, j \ne i} n_j a_j.
+      \]
+    Значит,  в базисе \( (a_1 + q a_i, a_2, \dots, a_k) \) разложение
+      \( b_1 \) содержит коэффициент \( r < n_1 \) "--- противоречие
+      с выбором. Значит, \( n_1 \divides n_i \), \( i \ge 2 \).
+      Положим \( a'_1 = \sum_{i = 1}^n \frac{n_i}{n_1} a_i =
+      a_1 + \sum_{i \ge 2} \frac{n_i}{n_1} a_i \). Тогда
+      \( (a_1', a_2, \dots, a_k) \) "--- базис в \( A \), причём
+      \( b_1 = n_1 a_1' \).  Дальше будем считать, что \( a_1' = a_1 \).
+
+    \item Пусть \( b \in B \), \( b = \sum_{i = 1}^k d_i a_i \).
+      Предположим, что \( n_1 \ndivides d_1 \), \( d_1 = q n_1 + r\),
+      \( o < r < n \). Значит, \( b - q b_1 = \sum_{i = 1}^k (d_i - q n_i)a_i =
+      r a_1 + \sum_{i = 2}^k (d_i - q n_i) a_i \).
+      Итак, в разложении элемента \( b - qb_1 \in B \) по базису
+      \( (a_1, \dots, a_k) \) есть коэффициент с \( r < n_1 \) "---
+      противоречит с выбором \( b_1 \).
+      Т. к. \( b_1 = n_1 a_1 \), то \( n_2 = n_3 = \dots = n_k = 0 \).
+      Предположим, что \( n_1 \ndivides d_i \)
+      при некотором \( i \ge 2 \).
+      Положим \( b_1' = b - \frac{d_1}{n_1} b_1 + b_1 \in B \),
+      \( b_1' = n_1 a_1 + \sum_{i = 2}^k d_i a_i \). Тогда
+      \( b_1' \) выражается через \( (a_1, \dots, a_k) \) с одним
+      из коэффициентов равным \( n_1 \),
+      применяя к нему старое рассуждение,
+      получаем противоречие.
+      Итак, \( n_1 \divides d_i, i = 1, \dots, k \). Это означает,
+      что \( B < n_1 A \).
+
+    \item Заметим, что \( A = \langle a_1, \dots, a_k \rangle =
+      \langle a_1 \rangle \oplus \langle a_2, \dots, a_k \rangle \).
+      Обозначим \( A^* = \langle a_2, \dots, a_k \rangle \) и
+      положим \( B^* = B \cap A^* \),
+      тогда
+      \( B = \langle b_1 \rangle \oplus B^* \).
+      Действительно,
+      \(
+	\Forall{b \in B} b = \sum_{i = 1}^k d_i a_i,
+      \)
+      и \( n_1 \divides d_i \).
+      Тогда \( b = d_1 a_1 + \sum_{i = 2}^k d_i a_i = d_1 a_1 +  b^*  \), где
+      \( d_1 a_1 = \frac{d_1}{n_1} b_1 \), а \( b^* = b - \frac{d_1}{n_1} b_1 \in B \),
+      и \( b^* \in A^* \To b^* \in B^* \). Итак, \( \langle b_1 \rangle + B^* = B \).
+      Кроме того, \( \langle b_1 \rangle \cap B^* \subseteq
+      \langle a_1 \rangle \cap A^* = 0 \). Значит, эта сумма "--- прямая.
+      Применим предположение индукции к \( B^* < A^* \).
+      Получим согласованные базисы
+      \( (a_2', \dots, a_k') \) в \( A^* \) и
+      \( (b_2, \dots, b_l) \) в \( B^* \) такие, что
+      \( b_i = m_i a_i' \), \( m_2 \divides \dots \divides m_l \).
+      Тогда \( A = \langle a_1 \rangle \oplus \langle a_2', \dots, a_k' \rangle \To
+      (a_1, a_2', \dots, a_k') \) "--- базис в \( A \).
+      \( B = \langle b_1 \rangle \oplus \langle b_2, \dots, b_l \rangle \),
+      причём \( (b_2, \dots, b_l) \) "--- базис в \( B^* \), а тогда
+      \( (b_1, \dots, b_l) \) "--- базис в \( B \).
+      Осталось выяснить, что \( n_1 \divides m_2 \).
+
+      Это так, поскольку \( B < n_1 A \To \) коэффициенты разложения \( b_2 \)
+      по базису \( a_1, a_2', \dots, a_k' \) делятся на \( n_1 \),
+      т. е. \( n_1 \divides m_2 \).
+      \qedhere
+  \end{enumerate}
+\end{proof}
+
+\begin{corollary}
+  Пусть \( C \) "--- конечно порождённая абелева группа. Тогда
+  \[
+    C \cong \Integer^t \times \Integer_{m_1} \times
+  \dots \times \Integer_{m_l},
+  \]
+  где \(t \ge 0 \)
+  и \( m_i \) "--- натуральные числа,
+  \( m_i > 1 \),
+  причём \( m_1 \divides m_2 \divides \dots \divides m_l \).
+\end{corollary}
+\begin{proof}
+  Как мы знаем, \( C \cong \Factor{A}[B] \), где
+  \( A \) "--- свободная абелева группа и \( B < A \).
+  Выберем в \( A \) и \( B \) согласованные базисы (из теоремы).
+  Тогда \( A = \langle a_1 \rangle \times \dots \times
+  \langle a_k \rangle \), и \( B = \langle b_1 \rangle \times \dots \times
+  \langle b_l \rangle \), при этом \( \langle b_i \rangle < \langle a_i \rangle \).
+  Значит,
+  \[
+    \Factor{A}[B] \cong \Factor{\langle a_1 \rangle}[\langle b_1 \rangle]
+    \times \dots \times \Factor{\langle a_l \rangle}[\langle b_l \rangle]
+    \times \langle a_{l+1} \rangle \times \dots \times \langle a_k \rangle
+    \cong \Factor{\Integer}[m_1 \Integer]
+    \times \dots \times \Factor{\Integer}[m_l \Integer]
+    \times \Integer \times \dots \times \Integer \cong
+    \Integer^{k - l} \times \Integer_{m_1} \times \dots \times \Integer_{m_l}.
+  \]
+  Наконец, если \( m_i = 1 \), то \( \Integer_{m_i} = \{ 0 \} \) и этот
+  сомножитель можно выкинуть.
+\end{proof}
+\begin{corollary}
+  Пусть \( C \) "--- конечно порждённая абелева группа.
+  Тогда
+  \begin{equation}\label{abel-structure} \tag{*}
+    C \cong \Integer^t \times \Integer_{p_1^{\alpha_1}} \times
+    \dots \times \Integer_{p_s^{\alpha_s}}
+  \end{equation}
+  где \( p_1, \dots, p_s \) "--- простые (не обязательно различные),
+  а \( \alpha_i \in \Natural \).
+\end{corollary}
+\begin{proof}
+  Если \( m_i = p_1^{\alpha_1} \dots p_d^{\alpha_d} \),
+  то \( \Integer_{m_i} \cong \Integer_{p_1^{\alpha_1}} \times
+  \dots \times \Integer_{p_d^{\alpha_d}} \).
+  Осталось применить это к каждому сомножителю
+  вида \( \Integer_{m_i} \).
+\end{proof}
+
+Следующая цель "--- доказать единственность такого разложения
+(точнее, единственность набора из \( t \) и системы
+\( (p_1^{\alpha_1}, \dots, p_s^{\alpha_s}) \) "--- с точностью
+до перестановки).
+
+\begin{proposition}
+  Пусть \( C \) "--- группа вида \eqref{abel-structure}.
+  Тогда \( T(C) = \{ 0 \}^t \times \Integer_{p_1^{\alpha_1}}
+  \times \dots \times \Integer_{p_s^{\alpha_s}} \) и
+  \( \Factor{C}[T(C)] \cong \Integer^t \).
+\end{proposition}
+\begin{proof}
+  Пусть \( x \in C \), \( x = (x_1, \dots, x_t, y_1, \dots, y_s) \).
+  Если \( x_i \ne 0 \), то \( \ord x = \infty \), ибо
+  \( \Forall{n \in \Integer_+} n x_i \ne 0 \).
+  Если \( x_1 = \dots = x_t = 0 \), то
+  \( p_1^{\alpha_1} \dots p_s^{\alpha_s} x = 0 \).
+  Итак, \( T(C) \) охарактеризован.
+
+  Тогда \( \Factor{C}[T(C)] \cong
+  (\Factor{\Integer}[\{ 0 \}])^t \times
+  \Factor{\Integer_{p_1}^{\alpha_1}}[\Integer_{p_1}^{\alpha_1}]
+  \times \dots \times
+  \Factor{\Integer_{p_s}^{\alpha_s}}[\Integer_{p_s}^{\alpha_s}]
+  \cong \Integer^t \).
+\end{proof}
+
+\begin{theorem}
+  Пусть \( F \) "--- поле, а \( G < F^* \),
+  \( |F| < \infty \). Тогда \( G \) "--- циклическая.
+  В частности, если \( |F| < \infty \), то
+  \( F^* \) "--- циклическая.
+\end{theorem}
+\begin{proof}
+  Поскольку \( |G| < \infty \), \( G \) "--- конечно порождённая
+  абелева группа \( \To G \cong \Integer_{m_1} \times
+  \dots \times \Integer_{m_k} \), где
+  \( 1 < m_1 \divides m_2 \divides \dots \divides m_k \).
+  Тогда \( \Forall{g \in G} g^{m_k} = 1 \),
+  т. е. все элементы \( G \) "--- это корни уравнения
+  \( x^{m_k} - 1 = 0 \To \) их не более \( m_k \),
+  т. е. \( |G| \le m_k \). Значит, \( k = 1 \)
+  и \( G \cong \Integer_{m_k} \).
+\end{proof}
+
+\end{document}

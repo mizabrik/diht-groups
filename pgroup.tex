@@ -1,0 +1,135 @@
+\documentclass[main]{subfiles}
+
+\begin{document}
+% --- 2016-09-30 ---
+\section{$p$-группы}
+\begin{definition}
+  Пусть $p$ --- простое число. Группа $G$ называется $p$-группой, если
+  $|G| = p^n$, $n \in \Natural \setminus \{ 0 \}$.
+\end{definition}
+\begin{example}
+  Если $|G| = p$, то по теореме Лагранжа
+  порядок $e \ne g \in G$ равен $p$, т. е.
+  $|<g>| = p = |G| \To G = \langle g \rangle$.
+  Значит, $G$ циклическая и абелева.
+\end{example}
+
+\begin{theorem}
+  Пусть $G$ --- $p$-группа. Тогда $Z(G) \ne \{ e \}$.
+\end{theorem}
+\begin{proof}
+  Рассмотрим действие \( G \) на себя сопряжением.
+  Орбиты "--- классы сопряжённости,
+  если \( g \in Z(G) \), то \( g^G = \{ g \} \),
+  иначе \( g \notin Z(G) \To
+  1 < |g^G| = |G : C_G(g)| = p^k \).
+  \( k \) зависит от \( g \), но \( k \ge 1 \).
+  Выберем представителей \( g_i \) для каждого
+  класса сопряжённости, \( i \in \{ 1, \dots, n \} \),
+  тогда по формуле орбит:
+  \[
+    p^n = |G| = \sum_{i = 1}^n |g_i^G| =
+    |Z(G)| + {\sum_{|g_i^{G}| > 1} |G : C_G(g_i)|}.
+  \]
+  Второе слагаемое "---
+  сумма нетривиальных степеней \( p \),
+  но тогда \( p \divides |Z(G)| \To |Z(G)| > 1 \).
+\end{proof}
+
+\begin{theorem}
+  Пусть \( G \) "--- не абелева группа.
+  Тогда \( \Factor{G}[Z(G)] \) "--- не циклическая.
+\end{theorem}
+\begin{remark}
+  \( Z(G) \NSG G \To \) можем рассматривать факторгруппу.
+  Условие неабелевости важно, так как
+  иначе \( G = Z(G) \),
+  и тогда \( \Factor{G}[Z(G)] \) тривиальна, а потому циклична.
+\end{remark}
+\begin{proof}
+  Пусть это не верно.
+  Положим \( Z = Z(G) \),
+  и \( \Factor{G}[Z] = \langle a Z \rangle \),
+  \( a \in G \To \) все левые смежные классы имеют вид
+  \( a^k \cdot Z \), \( k \in \Integer \),
+  т. к. \( \Factor{G}[Z] \) циклична.
+  Рассмотрим произвольные \( g, h \in G \):
+  \( g = a^k x \), \( h = a^l y \),
+  \( k, l \in \Integer \), \( x, y \in Z \).
+  Но тогда \( gh = a^k x a^l y = a^l y a^k x = hg \),
+  ведь \( x \) и \( y \) коммутируют со всеми элементами.
+  Значит, \( G \) абелева, противоречие.
+\end{proof}
+
+\begin{corollary}
+  Если \( |G| = p^2 \), где \( p \) --- простое,
+  то \( G \) "--- абелева.
+\end{corollary}
+\begin{proof}
+  \( G \) "--- \( p \)-группа \( \To Z(G) \ne \{ e \} \),
+  т. е. \( |Z(G)| = p \) или \( |Z(G)| = p^2 \).
+  Во втором случае \( Z(G) = G \),
+  т. е. \( G \) "--- абелева.
+  Если же \( |Z(G)| = p \), то
+  \( |\Factor{G}[Z(G)]| = p \To \Factor{G}[Z(G)] \) "---
+  циклическая, тогда \( G \) всё равно должна быть абелевой.
+\end{proof}
+
+\begin{example}
+  Рассмотрим в \( GL_3(\Integer_p) \)
+  подгруппу \( UT_3(\Integer_p) \)
+  унитреугольных матриц, т. к. матриц вида
+  \[
+    \begin{pmatrix}
+      1 & a & b \\
+      0 & 1 & c \\
+      0 & 0 & 1
+    \end{pmatrix},
+  \]
+  это действительно подгруппа.
+  \( |UT_3(\Integer_p)| = p^3 \),
+  и она не абелева, т. к.
+  \begin{gather}
+    \begin{pmatrix}
+      1 & 1 & 0 \\
+      0 & 1 & 0 \\
+      0 & 0 & 1
+    \end{pmatrix} 
+    \cdot
+    \begin{pmatrix}
+      1 & 0 & 0 \\
+      0 & 1 & 1 \\
+      0 & 0 & 1
+    \end{pmatrix} 
+    =
+    \begin{pmatrix}
+      1 & 1 & 1 \\
+      0 & 1 & 1 \\
+      0 & 0 & 1
+    \end{pmatrix} \\
+    \begin{pmatrix}
+      1 & 0 & 0 \\
+      0 & 1 & 1 \\
+      0 & 0 & 1
+    \end{pmatrix} 
+    \cdot
+    \begin{pmatrix}
+      1 & 1 & 0 \\
+      0 & 1 & 0 \\
+      0 & 0 & 1
+    \end{pmatrix} 
+    =
+    \begin{pmatrix}
+      1 & 1 & 0 \\
+      0 & 1 & 1 \\
+      0 & 0 & 1
+    \end{pmatrix} \\
+  \end{gather}
+\end{example}
+
+\begin{exercise}
+  Какой у \( Z(UT_3(\Integer_p)) \) центр?
+  \( |Z(UT_3(\Integer_p))| \in \{ p, p^2 \} \).
+\end{exercise}
+
+\end{document}

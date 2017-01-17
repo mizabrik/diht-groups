@@ -1,0 +1,112 @@
+\documentclass[main]{subfiles}
+
+\begin{document}
+\section{Лемма Бернсайда}
+
+\begin{theorem}
+  Пусть конечная группа \( G \) действует
+  на \( \Omega \) транзитивно.
+  Определим для \( g \in G \)
+  \( F(g) = |\{ \omega \in \Omega \mid
+  g(\omega) = \omega \}| \).
+  Тогда
+  \[
+    \sum_{g \in G} F(g) = |G|
+  \]
+\end{theorem}
+%\begin{remark}
+%  \( |G(w)| = |\Omega| \).
+%\end{remark}
+\begin{proof}
+  Занумеруем \( G = \{ g_i \}_1^n \) и
+  \( \Omega = \{ \omega_i \}_1^k \),
+  обозначим
+  \[
+    (i, j) = \begin{cases*}
+      1, & если \( g_i(w_j) = w_j \) \\
+      0, & иначе
+    \end{cases*},
+  \]
+  тогда
+  \begin{gather}
+    F(g_i) = \sum_{j = 1}^k (i, j), \\
+    \sum_{g \in G} F(g) = \sum_{i,j} (i, j).
+  \end{gather}
+  Заметим, что
+  \[
+    \sum_{i = 1}^n (i, j) = |\St(w_j)| =
+    \frac{|G|}{|G(w_j)|} = \frac{|G|}{|\Omega|},
+  \]
+  а тогда сумма всех \( (i, j) \) "--- это
+  \( \frac{|G|}{|\Omega|} \cdot |\Omega| = |G| \).
+\end{proof}
+
+Если \( G \) действует на \( \Omega \),
+то можем определить действие на \( \Omega^2 \):
+\( g( (\omega_1, \omega_2) ) = (g(\omega_1), g(\omega_2)) \).
+\begin{definition}
+  Действие \( G \) на \( \Omega \)
+  называется \emph{2-транзитивным},
+  если действие \( G \) на \( \Omega^2 \)
+  транзитивно.
+\end{definition}
+\begin{exercise}
+  Если действие 2-транзитивно, то
+  \( \sum_{g \in G} F(G)^2 = 2|G| \).
+\end{exercise}
+
+\begin{corollary}[Лемма Бернсайда]
+  Пусть конечная группа \( G \)
+  действует на конечное \( \Omega \),
+  обозначим за \( \Factor{\Omega}[G] \)
+  множество орбит этого действия.
+  Тогда
+  \[
+    |\Factor{\Omega}[G]| =
+    \frac{1}{|G|} \sum_{g \in G} F(g).
+  \]
+\end{corollary}
+\begin{proof}
+  Пусть \( \Factor{\Omega}[G] = \{ \Omega_i \}_{i = 1}^k \),
+  тогда тем же действием \( G \) действует на \( \Omega_i \)
+  транзитивно. Обозначим
+  \( F_i(g) = |\{ w \in \Omega_i \mid g(w) = w \}| \).
+  Тогда по теореме \( \sum_{g \in G} F_i(G) = |G| \),
+  при этом \( F(G) = \sum_{i = 1}^k F_i(G) \), а тогда
+  \[
+    \sum_{g \in G} F(g) =
+    \sum_{i = 1}^k \sum_{g \in G} F_i(g) =
+    k \cdot |G| = |\Factor{\Omega}[G]| \cdot |G|. \qedhere
+  \]
+\end{proof}
+
+\begin{example}
+  Пусть \( p \) "--- нечётное простое число,
+  \( k \in \Natural \). Нужно найти количество
+  ожерелий из \( p \) бусин, которые могут иметь
+  \( k \) разных цветов, повороты и перевороты
+  отождествляются.
+  Если бы они не отождествлялись, ответом было бы \( k^p \).
+  Обозначим множество фиксированных ожерелий
+  за \( \Omega \),
+  на него действует группа диэдра \( D_p \),
+  тогда искомое число "--- \( |\Factor{\Omega}[D_p]| \).
+  Орбита "--- одно ожерелье с точностью
+  до поворотов и переворотов.
+  По лемме Бернсайда, достаточно
+  найти \( F(g) \) для любого \( g \in D_p \).
+  \begin{enumerate}
+    \item \( g = e \), \( F(g) = |\Omega| = k^p \).
+    \item \( g \) "--- осевая симметрия,
+      \( F(g) = k^{(p + 1)/2} \).
+    \item \( g \) "--- нетривиальный поворот.
+      Тогда он сохранит элемент только если все бусины
+      имеют один цвет, т. к. \( p \) "--- простое,
+      т. е. \( F(g) = k \).
+  \end{enumerate}
+
+  Итого, \( |\Factor{\Omega}[D_p]| =
+  \frac{1}{2p} (k^p +k^{(p+1)/2} \cdot p + k(p - 1)) \).
+\end{example}
+
+\end{document}

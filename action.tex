@@ -1,0 +1,325 @@
+\documentclass[main]{subfiles}
+
+\begin{document}
+\section{Действие группы на множество}
+\begin{definition}\label{def:action-1}
+  Пусть $G$ "--- группа, $\Omega$ "--- множество. Говорим,
+  что определено \emph{действие группы} $G$ на множестве $\Omega$,
+  если определено отображение $G \times \Omega \to \Omega$
+  (т. е. для любых $g \in G$, $\omega \in \Omega$ определён $g(\omega)
+  \in \Omega$), удовлетворяющее следующим свойствам:
+  \begin{enumerate}
+    \item $(gh)(\omega) = g(h(\omega))$
+    \item $e(\omega) = \omega$
+  \end{enumerate}
+\end{definition}
+
+\begin{definition}\label{def:action-2}
+  \emph{Действие группы} $G$ на множество $\Omega$ "--- это гомоморфизм
+  $G \to S(\Omega)$, где $S(\Omega)$ "--- группа всех биекций множества
+  $\Omega$ в себя.
+\end{definition}
+
+\begin{proposition}
+  Данные определения эквивалентны.
+\end{proposition}
+\begin{proof}
+  Пусть задано действие $G$ на $\Omega$
+  по определению \ref{def:action-1}.
+  Положим
+  для $g \in G$
+  $I_g : \Omega \to \Omega$,
+  $I_g(\omega) = g(\omega)$.
+  Тогда  $I_{gh}(\omega) = (gh)(\omega) = g(h(\omega)) = I_g \circ I_h(\omega)$,
+  т. е. $I_{gh} = I_g \circ I_h$.
+  Кроме того, $I_g \circ I_{g^{-1}} = I_e =
+  I_{g^{-1}} I_g$,
+  причём $I_e = \id$.
+  Т. е. $I_{g^{-1}}$ "--- это обратное отображение к $I_g$,
+  а значит $I_g$ "--- биекция.
+  Итак, $g \mapsto I_g$ "---
+  это требуемый гомоморфизм.
+
+  Наоборот,
+  пусть $g \mapsto I_g$ "---
+  гомоморфизм $G \to S(\Omega)$,
+  то положим $g(\omega) = I_g(\omega)$.
+  Тогда $(gh)(\omega) = I_{gh}(\omega) = I_g \circ I_h(\omega) = g(h(\omega))$,
+  т. е. первое свойство доказано.
+  Кроме того, $I_e = id$,
+  т. е. $e(\omega) = \omega$.
+\end{proof}
+
+\begin{definition}
+  Пусть $\phi : G \to S(\Omega)$ "--- действие группы на множестве. Тогда
+  \emph{ядром} этого действия называется $\Ker \phi = \{ g \in G \mid
+  \Forall{\omega \in \Omega} g(\omega) = \omega \}$.
+  Действие называется  \emph{точным} (или \emph{эффективным}), если
+  $\Ker \phi = \{ e \}$, т. е. если $\phi$ "--- мономорфизм.
+\end{definition}
+
+\begin{examples}~
+  \begin{enumerate}
+    \item $G = GL(V)$ действует на $V$:
+      $\phi \in GL(V)$, $v \in V$,
+      то $\phi(v) = \phi(v)$ (точно).
+    \item $S_n$ действует на $\{ 1, \dots, n \}$
+      тривиальным образом (точно).
+    \item Если $G$ действует на $\Omega$,
+      то можно определить действие $G$ на $\Omega^2$:
+      $g((\omega_1, \omega_2)) = (g(\omega_1), g(\omega_2))$.
+    \item Рассмотрим группу $O_2$ "--- всех преобразований плоскости, и в
+      $R^2$ рассмотрим правильный $n$-угольник $D_n$ с центром в $O$ Тогда можно
+      определить группу диэдра $D_n = \{ \phi \in O_2 \mid \phi(D_n) = D_n \}$.
+      Тогда $D_n$ действует на:
+      \begin{enumerate}
+	\item Плоскость $R^2$
+	\item Вершины $n$-угольника
+	\item Стороны $n$-угольника
+	\item Множество точке $n$-угольника
+      \end{enumerate}
+  \end{enumerate}
+\end{examples}
+
+\begin{definition}
+  Пусть $G$ действует на $\Omega$, $\omega \in \Omega$
+  Тогда \emph{орбитой} элемента $\omega$
+  называется
+  $G(\omega) = \{ g(\omega) \mid g \in G \}$.
+  Два элемента $\omega_1, \omega_2 \in \Omega$
+  \emph{эквивалентны} относительно действия,
+  если $\omega_2 \in G(\omega_1)$.
+\end{definition}
+
+\begin{proposition}
+  Определённое отношение является отношением эквивалентности, его классы "---
+  это орбиты действия.
+\end{proposition}
+\begin{proof}
+  $\omega_1 = e(\omega_1)$, т. е. отношение рефлексивно.
+  Если $\omega_2 \in G(\omega_1)$,
+  то $\omega_2 = g(\omega_1) \To
+  g^{-1}(\omega_2) = g^{-1}(g(\omega_1)) =
+  e(\omega_1) = \omega_1 \To \omega_1 \in G(\omega_2)$ "---
+  отношение симметрично. Если $\omega_2 = g_1(\omega_1)$, $\omega_3 =
+  g_2(\omega_2)$, то $\omega_3 = g_2(g_1(\omega_1)) = (g_2 \circ g_1)
+  (\omega_1)$ "--- транзитивность.
+
+  Наконец, $\{ \omega' \mid \omega' \in G(\omega)\} = G(\omega)$.
+\end{proof}
+\begin{corollary}
+  $\Omega$ разбивается на орбиты действия.
+\end{corollary}
+
+\begin{definition}
+  Действие называется \emph{транзитивным}, если у него одна орбита,
+  т. е. $\Forall{\omega, \omega' \in \Omega} \Exists{g \in G}
+  \omega' = g(\omega)$.
+\end{definition}
+
+\begin{example}
+  У действия $GL(V)$ на $V$ две орбиты: $\{ 0 \}$ и $V \setminus \{0\}$.
+\end{example}
+
+% --- 2016-09-29 (или 24) ---
+\begin{definition}
+  Пусть $G$ действует на $\Omega$, $\omega \in \Omega$.
+  Тогда $\St(\omega) =
+  \{ g \in G \mid g(\omega) = \omega \}$
+  называется \emph{стабилизатором}
+  (\emph{стационарной подгруппой})
+  элемента $\omega$.
+\end{definition}
+
+\begin{proposition}
+  $\St(\omega) < G$
+\end{proposition}
+\begin{proof}
+  Если $g, h \in St(\omega)$,
+  то $(gh)(\omega) = g(h(\omega)) =
+  \omega \To gh \in \St(\omega)$.
+  $g^{-1}(\omega) = g^{-1}(g(\omega)) = e(\omega) = \omega
+  \To g^{-1} \in \St(\omega)$.
+\end{proof}
+
+\begin{proposition}
+  Пусть $G$ действует на $\Omega$,
+  $\omega \in \Omega$,
+  $\omega' \in G(\omega)$;
+  пусть $\omega' = g'(\omega)$.
+  Тогда $\{ g \in G \mid \omega' = g(\omega) \} = g' St(\omega) =
+  St(\omega') g'$
+\end{proposition}
+\begin{proof}
+  $\omega' = g(\omega) \oTTo g'^{-1}(\omega') = (g'^{-1}g)(\omega) \oTTo
+  \omega = (g'^{-1}g)(\omega) \oTTo g'^{-1}g \in St(\omega) \oTTo
+  g \in g'St(\omega)$. Наоборот, $\omega' = g(\omega) \oTTo \omega = g^{-1}(\omega')
+  \oTTo g^{-1} \in g'^{-1} \St(\omega') \oTTo g \in \St(\omega') g'$.
+\end{proof}
+\begin{corollary}
+  $\St(\omega) = g'^{-1} St(\omega') g'$,
+  т. е. стабилизаторы двух элементов одной
+  орбиты сопряжены.
+\end{corollary}
+
+\begin{corollary}
+  $|G(\omega)| = |G : St(\omega)|$
+  (если $G(\omega)$ "--- конечна,
+  то $|G(\omega)| = \frac{|G|}{|St(\omega)|}$).
+\end{corollary}
+\begin{proof}
+  Сопоставим любому $\omega' \in G(\omega)$
+  множество $\{ g \in G \mid \omega' = g(\omega) \}$.
+  Это множество "---
+  левый смежный класс по $\St(\omega)$.
+  Ясно, что разным элементам в $G(\omega)$
+  соответствуют разные смежные классы и
+  любому смежному классу соответствует 
+  $\omega' \in G(\omega)$.
+  Итак, мы придумали биекцию
+  между $G(\omega)$ и $\Factor{G}[\St(\omega)]$.
+\end{proof}
+
+\begin{theorem}[формула орбит]
+  Пусть группа $G$ действует
+  на множество $\Omega = \Omega_1 \sqcup \dots \sqcup \Omega_k$,
+  где $\Omega_i$ "--- орбиты действия,
+  пусть $\omega_i \in \Omega_i$.
+  Тогда
+  $$|\Omega| = \sum_{i = 1}^k |\Omega_i| = \sum_{i = 1}^k |G : \St(\omega_i)|$$
+\end{theorem}
+
+\subsection{Примеры действия группы}
+\subsubsection{Действие на себя левыми сдвигами}
+$\Omega = G$, $\Forall{g, \omega \in G}
+g(\omega) = g \cdot \omega$.
+Орбиты -- вся $G$ (т. е. действие транзитивно),
+ядро тривиально
+($g \ne e \To g \omega \ne \omega$;
+такое действие называется \emph{свободным}).
+$\St(\omega) = e$.
+Это значит, что верна теорема Кэли:
+\begin{theorem}[Кэли]
+  Пусть $G$ "--- группа.
+  Тогда в $S(G)$ есть подгруппа $H \cong G$.
+\end{theorem}
+\begin{proof}
+  Действие левыми сдвигами определяет гомоморфизм $\phi : G \to S(\Omega) = S(G)$,
+  причём $\Ker \phi = \{e\}$. Значит, $\phi$ "--- мономорфизм,
+  $G \cong \Img \phi < S(G)$.
+\end{proof}
+
+\subsubsection{Действие на смежные классы сдвигами}
+Пусть $H < G$.
+Тогда $G$ действует левыми сдвигами на $\Omega = \Factor{G}[H]$:
+$\Forall{g, x \in G} g(xH) = gxH$
+($g_1(g_2(xH)) = g_1g_2xH = (g_1g_2)(xH$).
+Орбита "--- $\Factor{G}[H]$.
+Стабилизатор $xH$ "--- это $\{g \mid gxH = xH\}$.
+Но $gxH = xH \oTTo gx \in xH \oTTo g \in xHx^{-1}$.
+Значит, ядро действия есть
+$$K = \bigcap_{x \in G} x H x^{-1} = \bigcap_{x \in G} \St(xH).$$
+\begin{proposition}
+  $K$ "--- наибольшая по включению подгруппа в $H$, которая нормальна в $G$.
+\end{proposition}
+\begin{proof}
+  $K \NSG G$, т. к. это "--- ядро действия.
+  Наоборот, если $K' \NSG G$, $K' < H$,
+  то $\Forall{x \in G} K' = xK'x^{-1} < xHx^{-1} \To
+  K' < \bigcap_{x \in G} xHx^{-1} = K$
+\end{proof}
+
+\begin{exercise}
+  Пусть $H < G$, $|G:H| = n$.
+  Тогда существует $L \NSG G$ такая,
+  что $|G:L| \divides n!$.
+\end{exercise}
+
+Аналогичные действия правыми сдвигами определяются так:
+$g(\omega) = \omega g^{-1}$.
+$g(h(\omega)) = \omega h^{-1} g^{-1} = \omega (gh)^{-1} = (gh)(\omega)$,
+$e(\omega) = \omega$.
+
+\subsubsection{Действие сопряжением на себя}
+$\Omega = G$, $g(\omega) = \omega^{g^{-1}}$.
+Проверка: $g(h(\omega)) = (\omega^{h^{-1}})^{g^{-1}} =
+\omega^{h^{-1}g^{-1}} = \omega^{(gh)^{-1}} = (gh)(\omega)$,
+$e(\omega) = \omega$.
+Орбита $G(\omega) = \omega^G$ "--- класс сопряжённости,
+стабилизатор: $g\omega g^{-1} = \omega \oTTo g \omega = \omega g$,
+т. е. $\St(\omega) = \{ g \in G \mid g\omega = \omega g \}$ "---
+\emph{централизатор} элемента $\omega$,
+обозначается $C_G(\omega)$.
+Разумеется, $C_G(\omega)$ "--- наибольшая по включению подгруппа,
+все элементы которой перестановочны с $\omega$.
+Ядро действия есть
+$$\bigcap_{\omega \in G} C_G(\omega) =
+\{ g \in G \mid \Forall{\omega \in G} g \omega = \omega g \} = Z(G).$$
+Это множество называется \emph{центром} группы.
+
+\begin{remark}
+  $Z(G) \NSG G$.
+\end{remark}
+
+\begin{proposition}
+  Если $G$ "--- конечная группа, $\omega \in G$,
+  то $|\omega^G| \divides \frac{|G|}{|\omega|}$.
+\end{proposition}
+\begin{proof}
+  $$|\omega^G| = |G(\omega)| = \frac{|G|}{|\St(\omega)|} =
+  \frac{|G|}{|C_G(\omega)|}.$$
+  Однако, $\omega \in C_G(\omega) \To
+  \langle \omega \rangle < C_G(\omega) \To
+  |\omega| = |\langle \omega \rangle | \divides |C_G(\omega)|$.
+  Значит, $|\omega^G| = \frac{|G|}{|C_G(\omega)|}
+  \divides \frac{|G|}{|\omega|}$
+  Равенство достигается,
+  если $C_G(\omega)$ тривиален (степени $\omega$).
+\end{proof}
+
+\begin{definition}
+  \emph{Автоморфизм} группы $G$ "---
+  это изоморфизм $G \to G$.
+  Множество всех автоморфизмов $G$
+  обозначается $\Aut(G)$, это "---
+  группа относительно композиции.
+
+  Автоморфизм $\phi \in \Aut(G)$ называется \emph{внутренним},
+  если $\Exists{h \in G} \Forall{g \in G} \phi(g) = g^h$.
+  Множество всех внутренних автоморфизмов
+  обозначается через $\Inn(G)$.
+\end{definition}
+
+\begin{proposition}
+  $\Inn(G) < \Aut(G)$. Более того, $\Inn(G) \cong \Factor{G}[Z(G)]$.
+\end{proposition}
+\begin{proof}
+  Рассмотрим действие $G$ на себя сопряжениями. Это "--- гомоморфизм
+  $I : G \to S(G)$, образ элемента $g \in G$ обозначим $I_g$.
+  Тогда $\Forall{g \in G} I_g \in \Aut(G)$: $I_g(xy) = (xy)^{g^{-1}}
+  = x^{g^{-1}} y^{g^{-1}} = I_g(x) I_g(y)$
+  (кроме того, $I_g$ "--- биекция).
+  Значит, $I : G \to \Aut(G) < S(G)$,
+  $\Inn(G) = \Img I < \Aut(G)$,
+  $\Img I \cong \Factor{G}[\Ker I] = \Factor{G}[Z(G)]$.
+\end{proof}
+
+\begin{exercise}
+  \( \Inn(G) \NSG \Aut(G) \)
+\end{exercise}
+
+\subsubsection{Действие сопряжением на подгруппы}
+\( \Omega \) "--- множество подгрупп \( G \),
+$g(H) = H^{g^{-1}} = g H g^{-1} < G$.
+Орбита подгруппы $H$ "---
+все подгруппы, сопряжённые с $H$.
+Стабилизатор $H$ $\St(H) = \{ g \in G \mid gH = Hg \} = N_G(H)$ "---
+\emph{нормализатор} подгруппы $H$.
+$N_G(H)$ "--- наибольшая (по включению) подгруппа в $G$,
+в которой $H$ нормальная.
+
+\begin{remark}
+Количество подгрупп, сопряжённых с $H$ есть $|G:N_G(H)|$.
+\end{remark}
+
+\end{document}

@@ -1,0 +1,168 @@
+\documentclass[main]{subfiles}
+
+\begin{document}
+% --- 2016-09-01 ---
+\section{Основные понятия}
+\begin{definition}
+  \emph{Группа} "--- это непустое множество $G$
+  с бинарной операцией $\cdot$,
+  обладающей следующими свойствами:
+  \begin{itemize}
+    \item Ассоциативность:
+      $a \cdot (b \cdot c) = (a \cdot b) \cdot c$
+    \item Существование нейтрального элемента:
+      $\Exists{e \in G} \Forall{a \in G}
+      ae = ea = a$
+    \item Существование обратного элемента:
+      $\Forall{a \in g} \Exists{a^{-1} \in G}
+      aa^{-1} = a^{-1}a = e$
+  \end{itemize}
+  Обозначение "--- $(G, \cdot)$,
+  если операция очевидна "--- просто $G$.
+  Группа называется \emph{абелевой},
+  если операция \( \cdot \) коммутативна
+  ($a \cdot b = b \cdot a$).
+\end{definition}
+\begin{remark}
+  Нейтральный и обратные элементы единственны.
+\end{remark}
+
+\begin{definition}
+  \emph{Подгруппа} $H < G$ "---
+  это непустое подмножество $H \subseteq G$,
+  замкнутое относительно операций:
+  \( \Forall{a, b \in H} a \cdot b \in H \),
+  \( \Forall{a \in H} a^{-1} \in H \).
+\end{definition}
+\begin{remark}
+  $H$ "--- также группа, с той же операцией
+  (ограниченной на \( H \)).
+\end{remark}
+
+\begin{definition}
+  \emph{Порядок группы} "--- число её элементов $|G|$.
+  \emph{Порядок элемента} группы $g \in G$ "---
+  это наименьшее $n \in \Natural$ такое,
+  что $g^n = e$ (и $\infty$, если такого $n$ нет).
+  Обозначение: $|g|$ или $\ord g$.
+\end{definition}
+
+\begin{definition}
+  Если $M \subset G$, то \emph{подгруппа, порождённая $M$} "---
+  это пересечение всех подгрупп, содержащих $M$.
+  Также $\langle M \rangle = \{ a_1 \dots a_n \mid
+  a_i \in M \lor a_i^{-1} \in M \}$.
+  Обозначение: $\langle M \rangle $.
+  Если существует \( g \in G \) такой, что
+  \( \langle g \rangle = G \),
+  то группа \( G \) "--- \emph{циклическая}.
+\end{definition}
+\begin{example}
+  $\langle G \rangle = G$, $\langle \emptyset \rangle = \{ e \}$.
+\end{example}
+\begin{remark}
+  $\ord g = |\langle g \rangle|$.
+\end{remark}
+
+\begin{definition}
+  Биекция $\phi: G \to H$, сохраняющая операцию
+  ($\phi(g_1 g_2) = \phi(g_1) \phi(g_2)$),
+  называется \emph{изоморфизмом групп} \( G \) и \( H \).
+  Если он существует, то $G$ и $H$ \emph{изоморфны}
+  (\( G \cong H \)).
+\end{definition}
+
+\section{Примеры групп}
+\begin{enumerate}
+  \item $(\Integer, +)$, $(\Integer_n, +)$ "---
+    единственные (с точностью до изоморфизма)
+    циклические группы.
+    Подгруппа циклической группы "--- также циклическая.
+  \item $(F, +)$, $(F^*, \cdot)$, где $F$ "--- поле.
+  \item $(V, +)$, где $V$ "--- линейное пространство.
+  \item $S_n$ "--- группа перестановок $n$ элементов
+    (т. е. биекций
+    $\{ 1, \dots, n \} \to \{ 1, \dots, n \}$)
+    относительно композиции.
+    Перестановку можно записать в виде таблицы,
+    или же в виде произведение
+    независимых циклов
+    (цикл $\pi = \Cycle{a_1 & \dots & a_k}$ "--- это перестановка такая,
+    что $\pi(a_i) = a_{i + 1}$ для $i = 1, \dots, k - 1$
+    и $\pi(a_k) = a_1$, остальные
+    элементы неподвижны).
+    Кроме того, $S_n$ порождается множеством всех транспозиций.
+    Знак перестановки $\sigma \in S_n$ есть
+    $(-1)^\sigma = \sgn \sigma = (-1)^{N(\sigma)}$,
+    где $N(\sigma)$ "--- число инверсий в $\sigma$
+    (совпадает по чётности
+    с количеством транспозиций
+    в любом разложении $\sigma$).
+  \item $GL_n(F)$ "--- группа невырожденных матриц 
+    над $F$ относительно умножения.
+  \item $GL(V)$, где $V$ "--- линейное пространство над $F$,
+    "--- обратимые преобразования
+    $V$ относительно композиции.
+    $GL(V) \cong GL_{\dim V}(F)$.
+  \item Подгруппы этих групп, в частности:
+    \begin{itemize}
+      \item $A_n < S_n$ "--- подгруппа всех чётных перестановок.
+      \item $SL_n(F) < GL_n(F)$ "--- подгруппа всех матриц с единичным определителем.
+      \item $O_n < GL_n(\Real)$ "--- подгруппа всех ортогональных матриц.
+      \item $\Complex_n < \Complex^*$:
+	$\Complex_n = \{ z \in \Complex \mid z^n = 1 \}$,
+	$\Complex_n \cong \Integer_n$.
+    \end{itemize}
+\end{enumerate}
+
+\section{Смежные классы}
+\begin{definition}
+  Пусть $H < G$, $g \in G$.
+  \emph{Левый смежный класс} элемента $g$ по $H$ "--- это $gH$,
+  \emph{правый} "--- $Hg$,
+  где $AB = \{ ab \mid a \in A, b \in B \}$
+  для \( A, B \subset G \)
+  (вместо одного элемента подразумевается
+  множество из этого элемента).
+  $\Factor{G}[H]$ "--- множество всех левых смежных классов по $H$,
+  $\Factor[H]{G}$ "--- правых.
+\end{definition}
+\begin{remark}
+  Для любых $a, b \in G$
+  $aH \cap bH \ne \emptyset
+  \oTTo b^{-1}a \in H
+  \oTTo aH = bH
+  \oTTo b \in aH$.
+
+  Значит, левые (правые) смежные классы "--- разбиение $G$.
+\end{remark}
+
+\begin{proposition}
+  Пусть $H < G$. Тогда $\Factor{G}[H]$ равномощно $\Factor[H]{G}$.
+\end{proposition}
+\begin{proof}
+  Построим биекцию $\phi : \Factor{G}[H] \to \Factor[H]{G}$:
+  $\phi(gH) = H g^{-1}$.
+  Заметим, что $\phi(gH) = Hg^{-1} = H^{-1} g^{-1} = (gH)^{-1}$,
+  а тогда $\phi$ корректно определено
+  и является отображением из $\Factor{G}[H]$ в $\Factor[H]{G}$.
+  Биективность следует из существования
+  \(\phi^{-1} : Hg \mapsto g^{-1}H \).
+\end{proof}
+\begin{remark}
+  Отображение $gH \mapsto Hg$ не всегда корректно определено.
+\end{remark}
+
+\begin{definition}
+  Если $H < G$, то \emph{индексом} $H$ в $G$
+  называется $|G:H| = |\Factor{G}[H]| = |\Factor[H]{G}|$.
+\end{definition}
+
+\begin{theorem}[Лагранжа]
+  Для конечной группы
+  $|G| = |H| \cdot |G:H|$.
+\end{theorem}
+\begin{corollary}
+  $|H|$ делит $|G|$, и для любого \( g \in G \) $|g|$ делит $|G|$.
+\end{corollary}
+\end{document}

@@ -1,0 +1,74 @@
+\documentclass[main]{subfiles}
+
+\begin{document}
+% "--- 2016-09-09 ---
+
+\section{Сопряжение}
+\begin{definition}
+  Пусть $G$ "--- группа, $g, x \in G$.
+  Тогда элементом, \emph{сопряжённым} к $g$ при
+  помощи $x$,
+  называется $g^x = x^{-1} g x$.
+\end{definition}
+\begin{example}
+  Две матрицы одного преобразования
+  в различных базисах
+  сопряжены в $GL_n(F)$,
+  их сопрягает матрица перехода.
+\end{example}
+
+\begin{proposition}~
+  \begin{enumerate}
+    \item $g^{xy} = (g^x)^y$
+    \item $(g_1 g_2)^x = g_1^x g_2^x$
+    \item $(g^{-1})^x = (g^x)^{-1}$
+  \end{enumerate}
+\end{proposition}
+\begin{proof}~
+  \begin{enumerate}
+    \item $g^{xy} = y^{-1} x^{-1} g x y = y^{-1} g^x y = (g^x)^y$.
+    \item $g_1^x g_2^x = x^{-1} g_1 x x^{-1} g_2 x =
+      x^{-1} g_1 g_2 x = (g_1 g_2)^x$.
+    \item $g^x (g^{-1})^x = (gg^{-1})^x = e^x = e \To (g^x)^{-1} = (g^{-1})^x$.
+  \end{enumerate}
+\end{proof}
+
+\begin{proposition}
+  Отношение сопряжённости "--- это отношение эквивалентности.
+\end{proposition}
+\begin{proof}~
+  \begin{enumerate}
+  \item Рефлексивность: $g = g^e$.
+  \item Симметричность: $g^x$ сопряжён к $g$, то $g = (g^x)^{x^{-1}}$.
+  \item Транзитивность: $g_2 = g_1^x$, $g_3 = g_2^y$, то $g_3 = (g_1^x)^y =
+    g_1^{xy}$. \qedhere
+  \end{enumerate}
+\end{proof}
+
+\begin{definition}
+  Класс элемента \( g \)
+  относительно этого отношения "---
+  \emph{класс сопряжённости} этого
+  элемента $g$. Обозначение: $g^G$.
+\end{definition}
+
+\begin{proposition}
+  Пусть $H < G$.
+  Тогда $H \NSG G \oTTo$ $H$ есть объединение
+  нескольких классов сопряжённости.
+\end{proposition}
+\begin{proof}
+  $H \NSG G \oTTo \Forall{g \in G} H = g^{-1} H g \To$ вместе с любым элементом
+  $h \in H$, $h^G \subseteq H$ $\To H = \bigcup_{h \in H} h^G$.
+
+  Наоборот, если $H = \bigcup_{\alpha \in A} g_\alpha^G$,
+  то $g^{-1} Hg =
+  \bigcup_{\alpha \in A} (g_\alpha^G)^g =
+  \bigcup_{\alpha \in A} g_\alpha^G = H$.
+\end{proof}
+
+\begin{exercise}
+  Пусть $g_1, g_2 \in G$. Тогда $g_1^G \cdot g_2^G$ "--- объединение нескольких
+  классов сопряжённости, но не обязательно одного.
+\end{exercise}
+\end{document}
